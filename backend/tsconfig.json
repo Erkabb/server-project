@@ -1,14 +1,36 @@
 {
   "compilerOptions": {
-    "target": "ES6",           
-    "module": "CommonJS",       
-    "outDir": "./dist",          
-    "rootDir": "./src",          
-    "strict": true,              
-    "esModuleInterop": true,    
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true     
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    // "outDir": "./dist",
+    // "rootDir": "./src",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "noEmit": true
   },
-  "include": ["src"],           
-  "exclude": ["node_modules"]    
+  "include": [
+    "src/**/*.ts",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
