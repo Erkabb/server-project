@@ -32,7 +32,8 @@ scalar Date
         message:String!
     }
     type Query {
-        getProduct: Product!
+        getProduct: [Product!]!
+        getProductById(_id:ID!):Product!
     }
     type Mutation{
         createProduct(input: ProductInput!):Response!

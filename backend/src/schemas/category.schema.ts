@@ -13,6 +13,6 @@ scalar Date
         createCategory(categoryName:String!):Category!
     }
     type Query{
-        getCategory:Category!
+        getCategory:[Category!]!
     }
 `
