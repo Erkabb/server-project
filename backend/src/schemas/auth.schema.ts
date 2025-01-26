@@ -6,8 +6,8 @@ scalar Date
     _id: ID!
     email: String!
     password: String!
-    firstname:String!
-    lastname:String!
+    firstname:String
+    lastname:String
     role: String
     phoneNumber: String
     otp: String

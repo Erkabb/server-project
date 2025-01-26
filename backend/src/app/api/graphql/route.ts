@@ -1,10 +1,10 @@
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import { typeDefs } from '../../schemas';
-import { resolvers } from '../../resolvers';
+import { typeDefs } from '../../../schemas';
+import { resolvers } from '../../../resolvers';
 import { NextRequest } from 'next/server';
-import { connectToDb } from '../../utils/connect-to-db';
-import { Context } from '../../types';
+import { connectToDb } from '../../../utils/connect-to-db';
+import { Context } from '../../../types';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 console.log('GraphQL server starting...'); // Debugging log
 connectToDb();
@@ -15,7 +15,7 @@ const server = new ApolloServer<Context>({
   introspection: true,
 });
 
-export default startServerAndCreateNextHandler<NextRequest, Context>(server, {
+const handler=startServerAndCreateNextHandler<NextRequest, Context>(server, {
   context: async (req) => {
     const token = req.headers.get('authorization') || '';
 
@@ -33,3 +33,5 @@ export default startServerAndCreateNextHandler<NextRequest, Context>(server, {
     };
   },
 });
+
+export { handler as GET, handler as POST };
