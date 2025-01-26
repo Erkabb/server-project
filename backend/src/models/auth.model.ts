@@ -25,11 +25,9 @@ const userSchema=new Schema<User>({
     },
     firstname: {
         type:String,
-        required:true,
     },
     lastname: {
         type:String,
-        required:true,
     },
     role:{
         type:String,
