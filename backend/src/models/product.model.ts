@@ -11,7 +11,7 @@ type Product={
     soldQuantity:string;
     totalQuantity:string;
     discount:string;
-    category:Schema.Types.ObjectId
+    category:Schema.Types.ObjectId[]
 };
 
 const productSchema=new Schema<Product>({
@@ -51,11 +51,11 @@ const productSchema=new Schema<Product>({
         type:String,
         default:'0'
     },
-    category:{
+    category:[{
         type:Schema.Types.ObjectId,
         required:true,
         ref:"Category",
-    }},
+    }]},
 {
     timestamps:true,
 });

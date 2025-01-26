@@ -28,10 +28,13 @@ scalar Date
         discount:String
         category:[ID!]!
     }
+    type Response {
+        message:String!
+    }
     type Query {
         getProduct: Product!
     }
     type Mutation{
-        createProduct(input: ProductInput):Product!
+        createProduct(input: ProductInput!):Response!
     }
 `
