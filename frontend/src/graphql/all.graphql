@@ -1,0 +1,22 @@
+query GetProduct {
+  getProduct {
+    _id
+    name
+    detail
+    unitPrice
+    size
+    images
+    color
+    soldQuantity
+    totalQuantity
+    discount
+  }
+}
+query GetCategory {
+  getCategory {
+    _id
+    categoryName
+    createdAt
+    updatedAt
+  }
+}

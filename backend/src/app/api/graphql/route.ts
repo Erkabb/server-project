@@ -6,6 +6,7 @@ import { NextRequest } from 'next/server';
 import { connectToDb } from '../../../utils/connect-to-db';
 import { Context } from '../../../types';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { NextResponse } from "next/server";
 console.log('GraphQL server starting...'); // Debugging log
 connectToDb();
 
@@ -34,4 +35,31 @@ const handler=startServerAndCreateNextHandler<NextRequest, Context>(server, {
   },
 });
 
-export { handler as GET, handler as POST };
+export async function OPTIONS() {
+  return NextResponse.json(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
+}
+
+export async function GET(request: NextRequest) {
+  const response = await handler(request);
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  response.headers.set("Access-Control-Allow-Credentials", "true");
+  return response;
+}
+
+export async function POST(request: NextRequest) {
+  const response = await handler(request);
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  response.headers.set("Access-Control-Allow-Credentials", "true");
+  return response;
+};
