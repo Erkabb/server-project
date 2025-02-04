@@ -18,3 +18,6 @@ export const SubHeader = () => {
     </div>
   )
 }
+ {/* <Image src={product.images[0] || '/serum.jpg'} alt='' width={400} height={400} className={`absolute top-0 left-0 w-full h-full rounded-md object-cover transition-opacity duration-500 ${
+              isHovered ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+            }`}/> */}
