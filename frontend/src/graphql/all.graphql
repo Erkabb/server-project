@@ -20,3 +20,25 @@ query GetCategory {
     updatedAt
   }
 }
+mutation SignUp($email: String!, $password: String!) {
+  signUp(email: $email, password: $password) {
+    _id
+    email
+    password
+    firstname
+    lastname
+    role
+    phoneNumber
+  }
+}
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    user {
+      _id
+      email
+      password
+      role
+    }
+    token
+  }
+}
