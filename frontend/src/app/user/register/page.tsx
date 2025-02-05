@@ -3,6 +3,7 @@ import { useAuth } from '@/components/providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import {z} from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Form, FormField, FormItem, FormLabel } from '@/components/ui/form';
 
 const formSchema=z.object({
     email: z.string().min(5).max(40),
@@ -20,7 +21,7 @@ const input=[{
         type:'password',
     }] as const;
 
-export const Register=()=>{
+const Register=()=>{
     const {handleSignIn}=useAuth();
     const form=useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -35,7 +36,25 @@ export const Register=()=>{
             password:values.password,
         });
     };
-    return( <div>
-    
+    return( 
+    <div className='w-full'>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormField control={form.control}
+                name='email'
+                render={({feild})=>(
+                    <FormItem>
+                        <FormLabel>
+                            Email
+                        </FormLabel>
+                        
+                    </FormItem>
+                )}
+                >
+
+                </FormField>
+            </form>
+        </Form>
     </div>)
-}
+};
+export default Register;
