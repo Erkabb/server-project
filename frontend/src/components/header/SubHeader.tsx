@@ -3,7 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 export const SubHeader = () => {
   return (
-    <div className="w-[1100px] h-[100px] bg-transparent  flex justify-between items-center text-[#7e7d7d] font-semibold">
+    <div className="md:w-[1100px] lg:w-2/3 h-[100px] bg-transparent  flex justify-between items-center text-[#7e7d7d] font-semibold">
      <div className="flex gap-5 items-center">
                 <Link href={''}>SHOP</Link>
                 <Link href={''}>ABOUT</Link>

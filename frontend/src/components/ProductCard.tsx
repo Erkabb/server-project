@@ -23,7 +23,7 @@ export const ProductCard = ({product}:{product: GetProductQuery['getProduct']}) 
       setIsHovered((prev) => ({ ...prev, [id]: isHovering }));
     };
   return (
-    <div className='w-full m-10 rounded-xl'>
+    <div className='w-full rounded-xl mt-10'>
  <Carousel
       className="w-full relative"
       setApi={setApi} opts={{ loop: true }}
@@ -34,14 +34,14 @@ export const ProductCard = ({product}:{product: GetProductQuery['getProduct']}) 
         </Button>
       <CarouselContent>
       {product.map((product) => (
-          <CarouselItem  className="md:basis-1/2 lg:basis-1/3 flex gap-14 ml-4 "  key={product._id}>
+          <CarouselItem  className="md:basis-1/3 lg:basis-1/4 h-fit flex gap-14 justify-center "  key={product._id}>
           <div>
               <Card >
-                <CardContent className=" w-[400px] h-[420px] p-0"
+                <CardContent className=" w-[400px] h-fit p-0"
                  onMouseEnter={() => handleHover(product._id, true)}
                  onMouseLeave={() => handleHover(product._id, false)} >
-                <div className='relative w-full  h-full touch-none overflow-auto '>
-                    <Image src={isHovered[product._id] ? '/moisture.jpg' : '/serum.jpg'} alt='' width={400} height={400} className='rounded-md object-cover aspect-[420px]'/>
+                <div className='relative w-full h-full '>
+                    <Image src={isHovered[product._id] ? '/moisture.jpg' : '/moisturizer.jpg'} alt='' width={400} height={420} className='rounded-md object-cover aspect-[420px]'/>
                     <div className='w-full absolute z-10 text-start top-5 pl-5'>
                           <p className="text-2xl font-semibold text-[#a9a7a7] ">{product.name}</p>
                           </div>

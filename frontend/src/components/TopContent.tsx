@@ -5,7 +5,7 @@ import { Button } from './ui/button'
 
 export const TopContent = () => {
   return (
-    <div className='w-full m-10 rounded-xl relative'>
+    <div className='w-full rounded-xl relative'>
          <div className='flex justify-center w-full sticky top-0'>
         <SubHeader/>
         </div>
