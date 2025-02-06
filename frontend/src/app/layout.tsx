@@ -4,6 +4,7 @@ import "./globals.css";
 import { PropsWithChildren } from "react";
 import { ApolloWrapper } from "@/components/providers";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,9 @@ export default function RootLayout({
       >
         <ApolloWrapper>
           <AuthProvider> 
+            <NuqsAdapter>
             {children}
+            </NuqsAdapter>
           </AuthProvider>
        </ApolloWrapper>
       </body>

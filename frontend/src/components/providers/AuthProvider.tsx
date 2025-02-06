@@ -7,6 +7,7 @@ import { toast } from "sonner";
 type SignUpParams={
     email:string;
     password:string;
+    repeatPassword:string;
 };
 type AuthContextType = {
     handleSignUp: (_params: SignUpParams) => void;
