@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { useAuth } from '@/components/providers/AuthProvider';
 import { useForm } from 'react-hook-form';
@@ -56,20 +57,19 @@ const SignUp=()=>{
         });
     };
     return( 
-    <div className='w-full'>
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full flex'>
-                <div className='w-1/2'>
-                    <Image src={'/blush.jpg'} alt='rhode' width={500} height={500} className='w-1/2'/>
+            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full h-1/3 flex rounded-xl'>
+                <div className='w-1/2 '>
+                    <Image src={'/blush.jpg'} alt='rhode' width={500} height={500} className='w-full h-1/2 rounded-s-xl'/>
                 </div>
-                <div className='w-1/2'>
+                <div className='w-1/2 bg-[#e5e5e5] rounded-e-xl flex flex-col justify-center'>
                 {input.map((input)=>(
                          <FormField control={form.control}
                          name='email'
                          key={input.name}
                          render={({field})=>(
                             <FormItem>
-                            <FormLabel className="text-xs text-white">
+                            <FormLabel className="text-white">
                               {input.label}
                             </FormLabel>
                             <FormControl className="text-white rounded-md">
@@ -85,6 +85,6 @@ const SignUp=()=>{
                 </div>
             </form>
         </Form>
-    </div>)
+)
 };
 export default SignUp;
