@@ -60,3 +60,7 @@ export const ProductCard = ({product}:{product: GetProductQuery['getProduct']}) 
     </div>
   )
 }
+
+
+
+
