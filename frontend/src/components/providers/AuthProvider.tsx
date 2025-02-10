@@ -9,9 +9,13 @@ type SignUpParams={
     password:string;
     repeatPassword:string;
 };
+type SignInParams={
+  email:string;
+  password:string;
+};
 type AuthContextType = {
     handleSignUp: (_params: SignUpParams) => void;
-    handleSignIn: (_params: SignUpParams) => void;
+    handleSignIn: (_params: SignInParams) => void;
     signout: () => void;
     user: LoginMutation['login']['user'] | null;
     setRefresh: Dispatch<SetStateAction<boolean>>;
@@ -55,7 +59,7 @@ type AuthContextType = {
         toast.error(error.message);
       },
     });
-    const handleSignIn = async ({ email, password }: SignUpParams) => {
+    const handleSignIn = async ({ email, password }: SignInParams) => {
       await signInMutation({
         variables: {
           input: {

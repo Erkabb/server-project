@@ -24,7 +24,7 @@ const input=[{
       },] as const;
 
 const SignUp=()=>{
-    const {handleSignIn}=useAuth();
+    const {handleSignUp}=useAuth();
     
     const formSchema=z.object({
         email: z.string().min(5).max(40),
@@ -49,7 +49,7 @@ const SignUp=()=>{
         },
     });
     const onSubmit=async(values: z.infer<typeof formSchema>)=>{
-        await handleSignIn( {
+        await handleSignUp( {
             email:values.email,
             password:values.password,
             repeatPassword:values.repeatPassword,
