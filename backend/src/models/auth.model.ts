@@ -10,6 +10,7 @@ type User={
     role:string;
     phoneNumber:string;
     otp:string;
+    newPassword:string;
     passwordResetToken: string;
     passwordResetTokenExpire: Date;
 };
@@ -38,6 +39,10 @@ const userSchema=new Schema<User>({
         type: String,
         default: null,
       },
+    newPassword: {
+        type: String,
+        default: null,
+    },
       passwordResetToken: { type: String, default: '' },
       passwordResetTokenExpire: { type: Date, default: undefined },
 },
