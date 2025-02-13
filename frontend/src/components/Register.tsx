@@ -28,7 +28,7 @@ const SignUp=()=>{
     
     const formSchema=z.object({
         email: z.string().min(5).max(40),
-        password: z.string().min(8, {message:'Password must be atleast 8 characters'}).regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
+        password: z.string().min(8, {message:'Password must be at least 8 characters'}).regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
         .regex(/[0-9]/, { message: 'Contain at least one number.' })
         .regex(/[^a-zA-Z0-9]/, {
           message: 'Contain at least one special character.',
@@ -49,17 +49,18 @@ const SignUp=()=>{
         },
     });
     const onSubmit=async(values: z.infer<typeof formSchema>)=>{
-        await handleSignUp( {
-            email:values.email,
-            password:values.password,
-            repeatPassword:values.repeatPassword,
+        handleSignUp({
+            email: values.email,
+            password: values.password,
+            repeatPassword: values.repeatPassword,
         });
     };
-    return( 
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full h-1/3 flex rounded-xl'>
-                <div className='w-1/2 '>
-                    <Image src={'/blush.jpg'} alt='rhode' width={500} height={500} className='w-full h-1/2 rounded-s-xl'/>
+    return(
+        <div className="w-full mx-10">
+           <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full h-1/3 rounded-xl flex'>
+                <div className='w-1/2'>
+                    <Image src={'/moisturizer.jpg'} alt='rhode' width={500} height={500} className='w-full rounded-s-xl'/>
                 </div>
                 <div className='w-1/2 bg-[#e5e5e5] rounded-e-xl flex flex-col justify-center'>
                 {input.map((input)=>(
@@ -84,6 +85,7 @@ const SignUp=()=>{
                 </div>
             </form>
         </Form>
-)
+        </div>
+    )
 };
 export default SignUp;
