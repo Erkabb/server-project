@@ -45,4 +45,4 @@ scalar Date
     changePassword(input: ChangePasswordInput!): Response!
     recoverPassword(input: RecoverPasswordInput!): Response!
   }
-`
+`;
