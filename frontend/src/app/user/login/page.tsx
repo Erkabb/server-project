@@ -1,7 +1,10 @@
+"use client";
 import Login from "@/components/Login";
+import {SubHeader} from "@/components/header/SubHeader";
 
-export const SignIn= ()=>(
+const SignIn= ()=>(
     <div>
         <Login/>
     </div>
-)
+);
+export default SignIn;

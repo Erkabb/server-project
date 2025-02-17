@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { createContext, Dispatch, SetStateAction, PropsWithChildren, useState, useEffect, useContext } from "react";
 import { toast } from "sonner";
 type SignUpParams={
+  firstname:string;
+  lastname:string;
     email:string;
     password:string;
     repeatPassword:string;
@@ -16,7 +18,7 @@ type SignInParams={
 type AuthContextType = {
     handleSignUp: (_params: SignUpParams) => void;
     handleSignIn: (_params: SignInParams) => void;
-    signout: () => void;
+    signOut: () => void;
     user: LoginMutation['login']['user'] | null;
     setRefresh: Dispatch<SetStateAction<boolean>>;
   };
@@ -35,9 +37,11 @@ type AuthContextType = {
             toast.error(error.message);
           }
     });
-    const handleSignUp =async({email, password}:SignUpParams)=>{
+    const handleSignUp =async({firstname, lastname, email, password}:SignUpParams)=>{
       await signUpMutation({
         variables: {
+          firstname,
+          lastname,
           email,
           password,
         },
@@ -69,7 +73,7 @@ type AuthContextType = {
         },
       });
     };
-    const signout = () => {
+    const signOut = () => {
       localStorage.removeItem('token');
       setUser(null);
     };
@@ -79,6 +83,6 @@ type AuthContextType = {
         setToken(localStorage.getItem('token'));
       }
     }, [token, refresh]);
-    return <AuthContext.Provider value={{setRefresh, user, handleSignIn, handleSignUp, signout}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{setRefresh, user, handleSignIn, handleSignUp, signOut}}>{children}</AuthContext.Provider>
   };
   export const useAuth = () => useContext(AuthContext);

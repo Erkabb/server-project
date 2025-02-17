@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import crypto from 'crypto';
 import User from "@/models/auth.model";
 
-export const RecoverPassword:MutationResolvers['recoverPassword']=async(_:{}, {input})=>{
+export const recoverPassword:MutationResolvers['recoverPassword']=async(_:object, {input})=>{
     const {password, resetToken}=input;
 
     const hashedResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');

@@ -3,30 +3,42 @@ import { useAuth } from '@/components/providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import {z} from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import Image from 'next/image';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from './ui/input';
 
-const input=[{
+const input=[
+    {
+        name:'firstname',
+        label:'Firstname',
+        type:'firstname'
+    },
+    {
+        name:'lastname',
+        label:'Lastname',
+        type:'lastname'
+    },
+    {
     name:'email',
-    label:'Имэйл хаяг',
+    label:'Email',
     type:'email',
 },
     {
         name:'password',
-        label:'Нууц үг',
+        label:'Password',
         type:'password',
     },
     {
         name: 'repeatPassword',
-        label: 'Нууц үг давтах',
-        type: 'password',
+        label: 'RepeatPassword',
+        type: 'RepeatPassword',
       },] as const;
 
 const SignUp=()=>{
     const {handleSignUp}=useAuth();
     
     const formSchema=z.object({
+        firstname: z.string().min(3),
+        lastname:z.string().min(3),
         email: z.string().min(5).max(40),
         password: z.string().min(8, {message:'Password must be at least 8 characters'}).regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
         .regex(/[0-9]/, { message: 'Contain at least one number.' })
@@ -50,36 +62,33 @@ const SignUp=()=>{
     });
     const onSubmit=async(values: z.infer<typeof formSchema>)=>{
         handleSignUp({
+            firstname:values.firstname,
+            lastname:values.lastname,
             email: values.email,
             password: values.password,
             repeatPassword: values.repeatPassword,
         });
     };
     return(
-        <div className="w-full mx-10">
+        <div className="w-full px-10 lg:h-[750px]">
            <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full h-1/3 rounded-xl flex'>
-                <div className='w-1/2'>
-                    <Image src={'/moisturizer.jpg'} alt='rhode' width={500} height={500} className='w-full rounded-s-xl'/>
+            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full rounded-xl flex h-full'>
+                <div className="bg-[url(/serum.jpg)] w-1/2 rounded-s-xl">
                 </div>
-                <div className='w-1/2 bg-[#e5e5e5] rounded-e-xl flex flex-col justify-center'>
+                <div className='w-1/2 bg-[#e5e5e5] rounded-e-xl flex flex-col justify-center gap-5 px-10'>
                 {input.map((input)=>(
                          <FormField control={form.control}
                          name='email'
                          key={input.name}
                          render={({field})=>(
-                            <FormItem>
-                            <FormLabel className="text-white">
-                              {input.label}
-                            </FormLabel>
-                            <FormControl className="text-white rounded-md">
-                              <Input type={input.type} className="p-2 rounded-sm" placeholder={input.label} {...field} />
+                            <FormItem className="">
+                            <FormControl className="bg-white rounded-xl">
+                              <Input type={input.type} className="lg:h-14 rounded-xl" placeholder={input.label} {...field} />
                             </FormControl>
                             <FormMessage className="text-xs text-red-500" />
                           </FormItem>
                          )}
                          >
-         
                          </FormField>
                 ))}
                 </div>

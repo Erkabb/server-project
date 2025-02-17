@@ -33,6 +33,12 @@ scalar Date
     password: String!
     resetToken: String!
   }
+  input SignUpInput {
+    firstname: String!
+    lastname: String!
+    email: String!
+    password: String!
+  }
   type Response {
     message: String!
   }
@@ -40,7 +46,7 @@ scalar Date
     getUser: User!
   }
   type Mutation {
-    signUp(email: String!, password: String!): User!
+    signUp(input: SignUpInput!): User!
     login(input: LoginInput!): AuthResponse!
     changePassword(input: ChangePasswordInput!): Response!
     recoverPassword(input: RecoverPasswordInput!): Response!

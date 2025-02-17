@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PropsWithChildren } from "react";
 import { ApolloWrapper } from "@/components/providers";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import {Header} from "@/components/header/Header";
+import {Footer} from "@/components/footer/Footer";
+import {SubHeader} from "@/components/header/SubHeader";
 
 export const metadata: Metadata = {
   title: "E-Commerce",
@@ -26,15 +18,18 @@ export default function RootLayout({
 }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
         <ApolloWrapper>
-          <AuthProvider> 
+            <div className="max-lg:w-full h-screen flex flex-col mx-10">
+            <Header/>
+            <SubHeader/>
+          <AuthProvider>
             <NuqsAdapter>
             {children}
             </NuqsAdapter>
           </AuthProvider>
+            <Footer/>
+            </div>
        </ApolloWrapper>
       </body>
     </html>

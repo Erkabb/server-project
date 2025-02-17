@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import {z} from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import Image from 'next/image';
 import { Input } from './ui/input';
 
 const formSchema=z.object({
@@ -15,19 +14,14 @@ const formSchema=z.object({
 
 const input=[{
     name:'email',
-    label:'Имэйл хаяг',
+    label:'Email',
     type:'email',
 },
     {
         name:'password',
-        label:'Нууц үг',
+        label:'Password',
         type:'password',
-    },
-    {
-        name: 'repeatPassword',
-        label: 'Нууц үг давтах',
-        type: 'password',
-      },] as const;
+    },] as const;
 
 const Login=()=>{
     const {handleSignIn}=useAuth();
@@ -44,35 +38,34 @@ const Login=()=>{
             password: values.password,
         });
       };
-    return( 
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='w-full h-1/3 flex rounded-xl'>
-                <div className='w-1/2 '>
-                    <Image src={'/blush.jpg'} alt='rhode' width={500} height={500} className='w-full h-1/2 rounded-s-xl'/>
-                </div>
-                <div className='w-1/2 bg-[#e5e5e5] rounded-e-xl flex flex-col justify-center'>
-                {input.map((input)=>(
-                         <FormField control={form.control}
-                         name='email'
-                         key={input.name}
-                         render={({field})=>(
-                            <FormItem>
-                            <FormLabel className="text-white">
-                              {input.label}
-                            </FormLabel>
-                            <FormControl className="text-white rounded-md">
-                              <Input type={input.type} className="p-2 rounded-sm" placeholder={input.label} {...field} />
-                            </FormControl>
-                            <FormMessage className="text-xs text-red-500" />
-                          </FormItem>
-                         )}
-                         >
-         
-                         </FormField>
-                ))}
-                </div>
-            </form>
-        </Form>
+    return(
+        <div className="w-full px-10 lg:h-[750px]">
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full rounded-xl flex h-full">
+                    <div className="bg-[url(/serum.jpg)] w-1/2 rounded-s-xl">
+                    </div>
+                    <div className='w-1/2 bg-[#e5e5e5] rounded-e-xl flex flex-col justify-center gap-5 px-10'>
+                        {input.map((input)=>(
+                            <FormField control={form.control}
+                                       name='email'
+                                       key={input.name}
+                                       render={({field})=>(
+                                           <FormItem>
+                                               <FormControl className="bg-white rounded-xl">
+                                                   <Input type={input.type} className="lg:h-14 rounded-xl" placeholder={input.label} {...field} />
+                                               </FormControl>
+                                               <FormMessage className="text-xs text-red-500" />
+                                           </FormItem>
+                                       )}
+                            >
+
+                            </FormField>
+                        ))}
+                    </div>
+                </form>
+            </Form>
+        </div>
+
 )
 };
 export default Login;
