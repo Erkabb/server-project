@@ -1,8 +1,8 @@
 'use client';
 export default function Home() {
-  return (
-    <div className="">
-      Rhode
-    </div>
-  );
+    return (
+        <div className="">
+            <Home/>
+        </div>
+    );
 }
