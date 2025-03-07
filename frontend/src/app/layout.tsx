@@ -3,7 +3,6 @@ import "./globals.css";
 import { PropsWithChildren } from "react";
 import { ApolloWrapper } from "@/components/providers";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import {Header} from "@/components/header/Header";
 import {Footer} from "@/components/footer/Footer";
 import {SubHeader} from "@/components/header/SubHeader";
@@ -24,9 +23,9 @@ export default function RootLayout({
             <Header/>
             <SubHeader/>
           <AuthProvider>
-            <NuqsAdapter>
+        
             {children}
-            </NuqsAdapter>
+ 
           </AuthProvider>
             <Footer/>
             </div>

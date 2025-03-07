@@ -38,13 +38,15 @@ export const AuthProvider = ({children}: PropsWithChildren) => {
             toast.error(error.message);
         }
     });
-    const handleSignUp = async ({firstname, lastname, email, password}: SignUpParams) => {
+    const handleSignUp = async ({email, firstname, lastname, password}: SignUpParams) => {
         await signUpMutation({
             variables: {
-                email,
-                firstname,
-                lastname,
-                password,
+                input: {
+                    email,
+                    firstname,
+                    lastname,
+                    password,
+                },
             },
         });
     }
