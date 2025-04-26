@@ -13,6 +13,20 @@ type User={
     newPassword:string;
     passwordResetToken: string;
     passwordResetTokenExpire: Date;
+    age?:number;
+    gender?:string;
+    isCompany:boolean;
+    companyName:string;
+    companyRegister:string;
+    companyCreatedDay:Date;
+    pfp:string;
+    birthDate:Date;
+    cookie:string;
+    status: string;
+    info:string;
+    nickname:string;
+    companyPhoneNumber:string;
+    address:string;
 };
 
 const userSchema=new Schema<User>({
@@ -45,6 +59,62 @@ const userSchema=new Schema<User>({
     },
       passwordResetToken: { type: String, default: '' },
       passwordResetTokenExpire: { type: Date, default: undefined },
+    age: { type: Number, default: null },
+    gender: { type: String, default: null },
+        isCompany: {
+            type: Boolean,
+            default: false
+        },
+        companyName: {
+            type: String,
+            default: null,
+            validate: {
+                validator: function(value) {
+                    if (this.isCompany) {
+                        return value != null && value.trim() !== '';
+                    }
+                    return true;
+                },
+                message: 'Company name is required when isCompany is true.'
+            }
+        },
+        companyRegister: {
+            type: String,
+            default: null,
+            validate: {
+                validator: function(value) {
+                    if (this.isCompany) {
+                        return value != null && value.trim() !== '';
+                    }
+                    return true;
+                },
+                message: 'Company register is required when isCompany is true.'
+            }
+        },
+    companyCreatedDay: { type: Date, default: undefined },
+    pfp: { type: String, default: null },
+        birthDate: {
+            type: Date,
+            default: undefined,
+            validate: {
+                validator: function(value) {
+                    if (!value) return true; // Allow empty/default if needed
+                    const today = new Date();
+                    const thirteenYearsAgo = new Date(
+                        today.getFullYear() - 13,
+                        today.getMonth(),
+                        today.getDate()
+                    );
+                    return value <= thirteenYearsAgo;
+                },
+                message: "User must be at least 13 years old."
+            }
+        },
+    cookie: { type: String, default: null },
+    status: {type:String, enum: ['basic', 'pro', 'multi'], default: 'basic'},
+    info: {type: String, default: null },
+    nickname: {type: String, default: null },
+    address: {type: String, default: null },
 },
     {
         timestamps:true,
@@ -53,9 +123,8 @@ const userSchema=new Schema<User>({
         if (!this.isModified('password')) {
           next();
         } else {
-          const hashedPassword = bcrypt.hashSync(this.password, 10);
-          this.password = hashedPassword;
-          next();
+            await bcrypt.hash(this.password, 10);
+            next();
         }
       });
       const User = models['User'] || model<User>('User', userSchema);

@@ -1,8 +1,8 @@
-import {MutationResolvers} from "@/generated/graphql";
+import {UserMutationResolvers} from "@/generated/graphql";
 import bcrypt from "bcrypt";
 import User from "../../models/auth.model";
 
-export const changePassword:MutationResolvers['changePassword']=async (_, {input}, {userId})=>{
+export const changePassword:UserMutationResolvers['changePassword']=async (_, {input}, {userId})=>{
     const {password, newPassword} = input;
     const user = await User.findById(userId);
     if(!user || !(bcrypt.compareSync(password, user.password))) throw new Error('User not found');

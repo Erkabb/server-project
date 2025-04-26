@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
 
 export const typeDefs = gql`
-scalar Date
     type Order{
     _id:ID!
     userId:ID!
@@ -13,6 +12,16 @@ scalar Date
     leftQuantity: String!
     userAddress: String!
     pickUpLocation: String!
+    isCompany: Boolean
+    companyName: String
+    companyRegister: String
+    phoneNumber: String!
+    status: String
+    shipmentTotal: String
+    declinedAt: Date
+    cancelReason: String
+    completedAt: Date
+    waitUntil: Date    
     createdAt: Date!
     updatedAt: Date!
     }
@@ -27,12 +36,13 @@ scalar Date
         leftQuantity: String!
         userAddress: String!
         pickUpLocation: String!
+        phoneNumber: String!
     }
-    type Response {
+    type OrderResponse {
     message: String!
     }
     
-    type Mutation {
-        createOrder(input: OrderInput!):Response!
+    type OrderMutation {
+        createOrder(input: OrderInput!):OrderResponse!
     }
 `

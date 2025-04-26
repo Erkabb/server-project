@@ -1,8 +1,8 @@
-import { MutationResolvers } from "@/generated/graphql";
+import { UserMutationResolvers } from "@/generated/graphql";
 import User from "../../models/auth.model"
 import bcrypt from 'bcrypt';
 import { generateToken } from "@/utils/generate-token";
-export const login:MutationResolvers['login']=async(_:unknown, {input})=>{
+export const login:UserMutationResolvers['login']=async(_:unknown, {input})=>{
    const {email, password}=input;
     const user=await User.findOne({email});
     if(!user)throw new Error('User not found');

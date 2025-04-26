@@ -5,14 +5,39 @@ type Product = {
     name: string;
     detail: string;
     unitPrice: string;
-    size: string;
-    images: [string];
-    color: string;
+    optionTypes: {
+        size: [string];
+        images: [string];
+        color: [string];
+    };
+    brand: {
+        _id: Schema.Types.ObjectId;
+        brandName: string;
+        brandLogo: string;
+    };
+    productProperties: {
+        _id: Schema.Types.ObjectId;
+        position: string;
+        value: string;
+        properties: {
+            _id:string;
+            name: string;
+            presentation: string;
+        }
+    };
+    store: {
+        _id: Schema.Types.ObjectId;
+        name: string;
+        short_name: string;
+        description: string;
+        storeLocation: string;
+        phone: string;
+        timesheets: string;
+    };
     soldQuantity: string;
     totalQuantity: string;
     discount: string;
-    brand: string;
-    category: Schema.Types.ObjectId[]
+    category: Schema.Types.ObjectId[];
 };
 
 const productSchema = new Schema<Product>({
@@ -28,8 +53,9 @@ const productSchema = new Schema<Product>({
             type: String,
             required: true,
         },
+    optionTypes: {
         size: {
-            type: String,
+            type: [String],
             default: 'S'
         },
         images: {
@@ -37,8 +63,33 @@ const productSchema = new Schema<Product>({
             required: true,
         },
         color: {
-            type: String,
+            type: [String],
             required: true,
+        },
+    },
+    brand: {
+        _id: Schema.Types.ObjectId,
+        brandName: String,
+        brandLogo: String,
+    },
+        productProperties: {
+            _id: Schema.Types.ObjectId,
+            position: String,
+            value: String,
+            properties: {
+                _id:Schema.Types.ObjectId,
+                name: String,
+                presentation: String,
+            },
+        },
+        store: {
+            _id: Schema.Types.ObjectId,
+            name: String,
+            short_name: String,
+            description: String,
+            storeLocation: String,
+            phone: String,
+            timesheets: String,
         },
         soldQuantity: {
             type: String,
@@ -51,10 +102,6 @@ const productSchema = new Schema<Product>({
         discount: {
             type: String,
             default: '0'
-        },
-        brand: {
-            type: String,
-            default: "No brand"
         },
         category: [{
             type: Schema.Types.ObjectId,

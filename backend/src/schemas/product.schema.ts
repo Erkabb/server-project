@@ -1,43 +1,96 @@
 import gql from 'graphql-tag';
 
 export const typeDefs = gql`
-scalar Date
     type Product{
         _id:ID!
         name:String!
         detail:String
         unitPrice:String!
-        size:String
-        images:[String]!
-        color:String!
+        optionTypes: OptionTypes
         soldQuantity:String
         totalQuantity:String!
         discount:String
-        brand: String
+        brandName:String
+        brandLogo:String
         category:[ID!]!
         createdAt: Date!
         updatedAt: Date!
-    }   
+        productProperties: Properties
+        store: Store
+    }
+    type OptionTypes {
+        size: [String]
+        images: [String]
+        color: [String]
+    }
+    input OptionTypeInput {
+        size: [String]
+        images: [String]
+        color: [String]
+    }
+    type Properties {
+        _id: ID!
+        position: String!
+        value: String!
+        properties: SubProperties!
+      }
+    type SubProperties {
+        _id: ID!
+        name: String!
+        presentation: String!
+    }
+    input SubPropertyInput {
+        name: String!
+        presentation: String!
+    }
+    input PropertyInput {
+        position: String!
+        value: String!
+        properties: SubPropertyInput!
+    }
+    
+    type Store {
+        _id: ID!
+        name: String
+        short_name: String
+        description: String
+        storeLocation: String
+        phone: String
+        timesheets: String
+    }
+    input StoreInput {
+        name: String
+        short_name: String
+        description: String
+        storeLocation: String
+        phone: String
+        timesheets: String
+    }
+    input BrandInput {
+        _id:ID!
+        name:String!
+        brandLogo:String!
+    }
     input ProductInput {
         name:String!
         detail:String
         unitPrice:String!
-        size:String
-        images:[String]!
-        color:String!
+        optionTypes: OptionTypeInput
         totalQuantity:String!
-        brand: String   
+        brand: BrandInput 
         discount:String
         category:[ID!]!
+        store: StoreInput
+        productProperties: PropertyInput
     }
-    type Response {
+    type ProductResponse {
         message:String!
     }
-    type Query {
+    type ProductQuery {
         getProduct: [Product!]!
         getProductById(_id:ID!):Product!
     }
-    type Mutation{
-        createProduct(input: ProductInput!):Response!
+    type ProductMutation{
+        createProduct(input: ProductInput!):ProductResponse!
     }
 `

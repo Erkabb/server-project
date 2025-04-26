@@ -1,13 +1,39 @@
-import {MutationResolvers} from "@/generated/graphql";
+import {ProductMutationResolvers} from "@/generated/graphql";
 import Category from "@/models/category.model";
 import Product from "@/models/product.model";
+import Store from "@/models/shop.model";
 
-export const createProduct: MutationResolvers['createProduct'] = async (_, {input}) => {
-    const {name, detail, unitPrice, size, images, color, totalQuantity, discount, category, brand} = input;
-    const findCat = await Category.findById(category);
-    if (!findCat) throw new Error('Category doesnt exist');
+export const createProduct: ProductMutationResolvers['createProduct'] = async (_, {input}) => {
+    const { category, store}=input;
+    const categoryFind = await Category.findById(category);
+    const findStore = await Store.findById(store);
     await Product.create({
-        name, detail, unitPrice, size, images, color, totalQuantity, discount, category, brand
+        name: input.name,
+        detail: input.detail,
+        unitPrice: input.unitPrice,
+        optionTypes: {
+            size: input.optionTypes?.size,
+            image: input.optionTypes?.images,
+            color: input.optionTypes?.color,
+        },
+        totalQuantity: input.totalQuantity,
+        brand: {
+            name: input.brand?.name,
+            brandLogo: input.brand?.brandLogo,
+        },
+        discount: input.discount,
+        category: categoryFind,
+        store: findStore,
+        productProperties: {
+            position: input.productProperties?.position,
+            value: input.productProperties?.value,
+            properties: {
+                name: input.productProperties?.properties.name,
+                presentation: input.productProperties?.properties.presentation,
+            }
+        }
     });
-    return {message: 'Success!'};
-}
+    return {
+        message: "Product successfully created!",
+    }
+};

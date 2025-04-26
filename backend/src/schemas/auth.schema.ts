@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 
 export const typeDefs = gql`
-scalar Date
   type User {
     _id: ID!
     email: String!
@@ -14,6 +13,17 @@ scalar Date
     newPassword:String
     passwordResetToken: String
     passwordResetTokenExpire: String
+    age: String
+    isCompany: Boolean
+    companyName: String
+    companyRegister: String
+    pfp: String
+    birthDate: String
+    cookie: String
+    status: String
+    info: String
+    nickname: String
+    companyPhoneNumber: String
     createdAt: Date!
     updatedAt: Date!
   }
@@ -42,10 +52,10 @@ scalar Date
   type Response {
     message: String!
   }
-  type Query {
+  type UserQuery {
     getUser: User!
   }
-  type Mutation {
+  type UserMutation {
     signUp(input: SignUpInput!): User!
     login(input: LoginInput!): AuthResponse!
     changePassword(input: ChangePasswordInput!): Response!
