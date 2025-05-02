@@ -1,8 +1,8 @@
-import {ShopMutationResolvers} from "@/generated/graphql";
+import {MutationResolvers} from "@/generated/graphql";
 import User from "@/models/auth.model";
 import Shop from "@/models/shop.model";
 
-export const createShop: ShopMutationResolvers['createShop']=async(_, {input})=>{
+export const createShop: MutationResolvers['createShop']=async(_, {input})=>{
     const {user}=input;
     const findUser=await User.findById(user);
     await Shop.create({

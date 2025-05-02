@@ -52,13 +52,4 @@ export const typeDefs = gql`
   type Response {
     message: String!
   }
-  type UserQuery {
-    getUser: User!
-  }
-  type UserMutation {
-    signUp(input: SignUpInput!): User!
-    login(input: LoginInput!): AuthResponse!
-    changePassword(input: ChangePasswordInput!): Response!
-    recoverPassword(input: RecoverPasswordInput!): Response!
-  }
 `;

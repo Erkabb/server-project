@@ -86,11 +86,4 @@ export const typeDefs = gql`
     type ProductResponse {
         message:String!
     }
-    type ProductQuery {
-        getProduct: [Product!]!
-        getProductById(_id:ID!):Product!
-    }
-    type ProductMutation{
-        createProduct(input: ProductInput!):ProductResponse!
-    }
 `

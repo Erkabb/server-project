@@ -5,7 +5,7 @@ dotenv.config();
 
  export const connectToDb = async () => {
   try {
-    const uri = process.env.MONGO_URI;
+    const uri = 'mongodb+srv://erkabb816:e9akbII4e04xtb3Y@cluster0.2ji91.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/ecommerce';
     if (!uri) {
       throw new Error('MONGO_URI is not defined in environment variables');
     }

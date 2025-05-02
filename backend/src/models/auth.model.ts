@@ -119,13 +119,21 @@ const userSchema=new Schema<User>({
     {
         timestamps:true,
     });
-    userSchema.pre('save', async function (next) {
-        if (!this.isModified('password')) {
-          next();
-        } else {
-            await bcrypt.hash(this.password, 10);
-            next();
-        }
-      });
+
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next(); // 🚫 Prevents moving on to hashing
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(this.password, 10);
+        this.password = hashedPassword;
+        next();
+    } catch (error) {
+        throw new Error();
+    }
+});
+
+});
       const User = models['User'] || model<User>('User', userSchema);
       export default User;

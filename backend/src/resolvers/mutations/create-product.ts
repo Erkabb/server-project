@@ -1,9 +1,9 @@
-import {ProductMutationResolvers} from "@/generated/graphql";
+import {MutationResolvers} from "@/generated/graphql";
 import Category from "@/models/category.model";
 import Product from "@/models/product.model";
 import Store from "@/models/shop.model";
 
-export const createProduct: ProductMutationResolvers['createProduct'] = async (_, {input}) => {
+export const createProduct: MutationResolvers['createProduct'] = async (_, {input}) => {
     const { category, store}=input;
     const categoryFind = await Category.findById(category);
     const findStore = await Store.findById(store);

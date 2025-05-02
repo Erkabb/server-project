@@ -30,11 +30,4 @@ export const shopTypeDef=gql`
     type ShopResponse {
         message: String!
     }
-    type ShopQuery {
-        getShop: [Shops!]!
-        getShopById(_id: ID!):Shops!
-    }
-    type ShopMutation {
-        createShop(input: ShopInput!):ShopResponse!
-    }
 `

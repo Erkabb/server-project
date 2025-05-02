@@ -8,11 +8,4 @@ scalar Date
         createdAt: Date!
         updatedAt: Date!
     }
-
-    type Mutation{
-        createCategory(categoryName:String!):Category!
-    }
-    type Query{
-        getCategory:[Category!]!
-    }
 `

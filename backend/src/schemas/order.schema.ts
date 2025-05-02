@@ -41,8 +41,4 @@ export const typeDefs = gql`
     type OrderResponse {
     message: String!
     }
-    
-    type OrderMutation {
-        createOrder(input: OrderInput!):OrderResponse!
-    }
 `
