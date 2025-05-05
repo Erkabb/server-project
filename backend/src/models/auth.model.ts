@@ -130,10 +130,8 @@ userSchema.pre('save', async function (next) {
         this.password = hashedPassword;
         next();
     } catch (error) {
-        throw new Error();
+        console.error(error);
     }
-});
-
 });
       const User = models['User'] || model<User>('User', userSchema);
       export default User;
