@@ -46,6 +46,7 @@ const userSchema=new Schema<User>({
     },
     role:{
         type:String,
+        enum: ['user','admin'],
         default:'user',
     },
     phoneNumber:String,

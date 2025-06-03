@@ -7,8 +7,7 @@ export const login:MutationResolvers['login']=async(_:unknown, {input})=>{
     const user=await User.findOne({email});
 
     if(!user)throw new Error('User not found');
- console.log('Input password:', password);
- console.log('Stored hash:', user.password);
+
     const isCheckPass=bcrypt.compareSync(password, user.password);
 
     if(!isCheckPass) throw new Error('Email or password is incorrect');

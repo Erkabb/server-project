@@ -3,13 +3,12 @@ import gql from "graphql-tag";
 export const typeDefs = gql`
     type Order{
     _id:ID!
-    userId:ID!
     productId:ID!
-    quantity: String!
-    total: String!
-    unitPrice: String!
-    discount: String!
-    leftQuantity: String!
+    quantity: Int!
+    total: Float!
+    unitPrice: Float!
+    discount: Float!
+    leftQuantity: Int!
     userAddress: String!
     pickUpLocation: String!
     isCompany: Boolean
@@ -17,26 +16,29 @@ export const typeDefs = gql`
     companyRegister: String
     phoneNumber: String!
     status: String
-    shipmentTotal: String
+    shipmentTotal: Float
     declinedAt: Date
     cancelReason: String
     completedAt: Date
     waitUntil: Date    
     createdAt: Date!
     updatedAt: Date!
+        availableHours: Float
+        pickedStaff: Float
     }
     
     input OrderInput {
-        userId: String!
         productId:ID!
-        quantity: String!
-        total: String!
-        unitPrice: String!
-        discount: String!
-        leftQuantity: String!
+        quantity: Int!
+        total: Float!
+        unitPrice: Float!
+        discount: Float!
+        leftQuantity: Int!
         userAddress: String!
         pickUpLocation: String!
         phoneNumber: String!
+        availableHours: Float
+        pickedStaff: Float
     }
     type OrderResponse {
     message: String!

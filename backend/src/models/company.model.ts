@@ -1,9 +1,7 @@
 import {model, models, Schema} from "mongoose";
-import {User} from "@/generated/graphql";
 
-type Shop= {
+type Company= {
     _id: Schema.Types.ObjectId,
-    user: User,
     number: number,
     email: string,
     officialName: string,
@@ -15,17 +13,13 @@ type Shop= {
     information: string,
     timesheet: string,
     registerNumber: string,
+    totalProducts: number,
 };
 
-const shopSchema = new Schema<Shop>({
+const companySchema = new Schema<Company>({
     number: {
         type:Number,
         unique: true,
-    },
-    user: {
-        type:String,
-        required:true,
-        ref: 'User',
     },
     email: {
         type: String,
@@ -68,7 +62,8 @@ const shopSchema = new Schema<Shop>({
         type: String,
         required: true,
     },
+    totalProducts: Number,
 }, { timestamps: true });
 
-const Shop=models['Shop'] || model<Shop>('Shop', shopSchema);
-export default Shop;
+const Company=models['Shop'] || model<Company>('Shop', companySchema);
+export default Company;

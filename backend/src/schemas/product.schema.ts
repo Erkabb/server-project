@@ -5,18 +5,18 @@ export const typeDefs = gql`
         _id:ID!
         name:String!
         detail:String
-        unitPrice:String!
+        unitPrice:Float!
         optionTypes: OptionTypes
-        soldQuantity:String
-        totalQuantity:String!
-        discount:String
-        brandName:String
-        brandLogo:String
+        soldQuantity:Int
+        totalQuantity:Int!
+        discount:Float
+        brand: [ID!]!
         category:[ID!]!
         createdAt: Date!
         updatedAt: Date!
         productProperties: Properties
-        store: Store
+        store: [ID!]
+        quantity: Int!
     }
     type OptionTypes {
         size: [String]
@@ -48,39 +48,21 @@ export const typeDefs = gql`
         value: String!
         properties: SubPropertyInput!
     }
-    
-    type Store {
-        _id: ID!
-        name: String
-        short_name: String
-        description: String
-        storeLocation: String
-        phone: String
-        timesheets: String
-    }
-    input StoreInput {
-        name: String
-        short_name: String
-        description: String
-        storeLocation: String
-        phone: String
-        timesheets: String
-    }
     input BrandInput {
-        _id:ID!
         name:String!
         brandLogo:String!
     }
     input ProductInput {
         name:String!
         detail:String
-        unitPrice:String!
+        unitPrice:Float!
         optionTypes: OptionTypeInput
-        totalQuantity:String!
-        brand: BrandInput 
-        discount:String
+        totalQuantity:Int!
+        brand: [ID!] 
+        discount:Float
         category:[ID!]!
-        store: StoreInput
+        store: [ID!]
+        quantity: Int!
         productProperties: PropertyInput
     }
     type ProductResponse {

@@ -1,9 +1,8 @@
 import gql from "graphql-tag";
 
-export const shopTypeDef=gql`
-    type Shops {
+export const companyTypeDef=gql`
+    type Companies {
         _id: ID!
-        user: [ID!]!
         number: Int!
         email: String!
         officialName: String!
@@ -15,11 +14,11 @@ export const shopTypeDef=gql`
         information: String
         timesheet: String
         registerNumber: String!
+        totalProducts: Int!
         createdAt: Date!
         updatedAt: Date!
     }   
-    input ShopInput {
-        user: [ID!]!
+    input CompanyInput {
         email: String!
         officialName: String!
         location: String
@@ -27,7 +26,7 @@ export const shopTypeDef=gql`
         officialLogo: String!
         registerNumber: String!
     }
-    type ShopResponse {
+    type CompanyResponse {
         message: String!
     }
 `

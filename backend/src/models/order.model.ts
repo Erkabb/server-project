@@ -2,13 +2,12 @@ import {models, model, Schema} from 'mongoose';
 
 type Order = {
     _id: Schema.Types.ObjectId;
-    userId: Schema.Types.ObjectId;
     productId: Schema.Types.ObjectId;
-    quantity: string;
-    total: string;
-    unitPrice: string;
-    discount: string;
-    leftQuantity: string;
+    quantity: number;
+    total: number;
+    unitPrice: number;
+    discount: number;
+    leftQuantity: number;
     userAddress: string;
     pickUpLocation: string
     isCompany:boolean;
@@ -21,35 +20,43 @@ type Order = {
     cancelReason: string;
     completedAt:Date;
     waitUntil: Date;
+    availableHours: number;
+    pickedStaff: string;
 };
+
+// userAddress: string,
+//     userPhoneNumber: string,
+//     pickUpLocation: string,
+//     pickUpDate: string,
+//     pickUpTime: string,
+//     additionalText: string,
+//     shippingAddress: string,
+//     shipmentTotal: string,
+//     shippingTime: string,
 const orderSchema = new Schema<Order>({
-    userId: {
-        type: String,
-        ref: "User",
-        required: true
-    },
     productId: {
         type: String,
         ref: "Product",
         required: true
     },
     quantity: {
-        type: String,
-        required: true
+        type: Number,
+        required: true,
+        default: 1,
     },
     total: {
-        type: String,
+        type: Number,
         required: true,
     },
     unitPrice: {
-        type: String,
+        type: Number,
         required: true
     },
     discount: {
-        type: String,
+        type: Number,
     },
     leftQuantity: {
-        type: String,
+        type: Number,
         required: true
     },
     userAddress: {
@@ -106,6 +113,8 @@ const orderSchema = new Schema<Order>({
         default: null,
     },
     completedAt: {type: Date, default: null},
+    availableHours: {type: Number, default: null},
+    pickedStaff: {type: String, default: null},
 }, {
     timestamps: true
 });

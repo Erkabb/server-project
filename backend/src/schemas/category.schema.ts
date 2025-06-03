@@ -7,5 +7,6 @@ scalar Date
         categoryName:String!
         createdAt: Date!
         updatedAt: Date!
+        totalProducts:Int
     }
 `

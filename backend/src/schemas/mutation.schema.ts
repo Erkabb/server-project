@@ -9,15 +9,20 @@ export const MutationAndQueriesTypeDefs = gql`
         createCategory(categoryName:String!):Category!
         createOrder(input: OrderInput!):OrderResponse!
         createProduct(input: ProductInput!):ProductResponse!
-        createShop(input: ShopInput!):ShopResponse!
+        createCompany(input: CompanyInput!):CompanyResponse!
+        createBrand(input: BrandInput!):BrandResponse!
+        createStore(input: StoreInput!):StoreResponse!
     }
     type Query {
         getUser: User!
-        getCategory:[Category!]!
+        getUsers: [User!]!
+        getCategory(_id:ID!): [Category!]!
+        getCategories:[Category]!
         getOrder: [Order!]!
         getProduct: [Product!]!
         getProductById(_id:ID!):Product!
-        getShop: [Shops!]!
-        getShopById(_id: ID!):Shops!
+        getShop: [Companies!]!
+        getShopById(_id: ID!):Companies!
+        
     }
 `
