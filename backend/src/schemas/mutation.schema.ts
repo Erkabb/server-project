@@ -12,6 +12,7 @@ export const MutationAndQueriesTypeDefs = gql`
         createCompany(input: CompanyInput!):CompanyResponse!
         createBrand(input: BrandInput!):BrandResponse!
         createStore(input: StoreInput!):StoreResponse!
+        getUploadSignature: Signature!
     }
     type Query {
         getUser: User!
