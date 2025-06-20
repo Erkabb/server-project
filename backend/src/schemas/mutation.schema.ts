@@ -12,7 +12,7 @@ export const MutationAndQueriesTypeDefs = gql`
         createCompany(input: CompanyInput!):CompanyResponse!
         createBrand(input: BrandInput!):BrandResponse!
         createStore(input: StoreInput!):StoreResponse!
-        getUploadSignature: Signature!
+        getUploadSignature(input: SignatureInput): Signature!
     }
     type Query {
         getUser: User!
@@ -24,6 +24,6 @@ export const MutationAndQueriesTypeDefs = gql`
         getProductById(_id:ID!):Product!
         getShop: [Companies!]!
         getShopById(_id: ID!):Companies!
-        
+        getSignature: Signature!
     }
 `
