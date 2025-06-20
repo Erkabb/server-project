@@ -10,6 +10,7 @@ const config: CodegenConfig = {
                 contextType: '../types#Context',
                 makeResolverTypeCallable: true,
                 maybeValue: 'T',
+                add: '/* eslint-disable @typescript-eslint/no-explicit-any */'
             },
         },
     },
