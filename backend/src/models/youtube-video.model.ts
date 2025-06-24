@@ -13,24 +13,28 @@
 // }
 // message
 
-import {model, models, Schema} from "mongoose";
+import { model, models, Schema } from "mongoose";
 
 type VideoUpload = {
-    _id: Schema.Types.ObjectId,
-    title: string,
-    description: string,
-    thumbnail: string,
-    channelTitle: string,
-    publishedAt: Date,
-    duration: string,
-    viewCount: number,
-    likeCount: number,
-    videoId: string,
-    youtubeUrl: string,
+  _id: Schema.Types.ObjectId;
+  title: string;
+  description: string;
+  thumbnail: string;
+  channelTitle: string;
+  publishedAt: Date;
+  duration: string;
+  viewCount: number;
+  likeCount: number;
+  videoId: string;
+  youtubeUrl: string;
 };
 
-const videoUploadSchema = new Schema<VideoUpload>({
-    title: String,
+const videoUploadSchema = new Schema<VideoUpload>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
     description: String,
     thumbnail: String,
     channelTitle: String,
@@ -39,9 +43,15 @@ const videoUploadSchema = new Schema<VideoUpload>({
     viewCount: Number,
     likeCount: Number,
     videoId: String,
-    youtubeUrl: String,
-}, { timestamps: true });
+    youtubeUrl: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true },
+);
 
-const VideoUpload = models['VideoUpload'] || model<VideoUpload>('VideoUpload', videoUploadSchema);
+const VideoUpload =
+  models["VideoUpload"] || model<VideoUpload>("VideoUpload", videoUploadSchema);
 
 export default VideoUpload;

@@ -3,7 +3,7 @@ import {
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
 } from "graphql";
-import { Context } from "@/types";
+import { Context } from "../types";
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -427,14 +427,14 @@ export type VideoUpload = {
   likeCount?: Maybe<Scalars["Float"]["output"]>;
   publishedAt?: Maybe<Scalars["Date"]["output"]>;
   thumbnail?: Maybe<Scalars["String"]["output"]>;
-  title?: Maybe<Scalars["String"]["output"]>;
+  title: Scalars["String"]["output"];
   videoId?: Maybe<Scalars["String"]["output"]>;
   viewCount?: Maybe<Scalars["Float"]["output"]>;
-  youtubeUrl?: Maybe<Scalars["String"]["output"]>;
+  youtubeUrl: Scalars["String"]["output"];
 };
 
 export type VideoUploadInput = {
-  title?: InputMaybe<Scalars["String"]["input"]>;
+  title: Scalars["String"]["input"];
   youtubeUrl: Scalars["String"]["input"];
 };
 
@@ -1201,14 +1201,10 @@ export type VideoUploadResolvers<
     ParentType,
     ContextType
   >;
-  title?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   videoId?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   viewCount?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  youtubeUrl?: Resolver<
-    Maybe<ResolversTypes["String"]>,
-    ParentType,
-    ContextType
-  >;
+  youtubeUrl?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
