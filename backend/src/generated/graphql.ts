@@ -108,6 +108,7 @@ export type Mutation = {
   login: AuthResponse;
   recoverPassword: Response;
   signUp: User;
+  uploadVideo: VideoUploadResponse;
 };
 
 
@@ -146,6 +147,11 @@ export type MutationCreateStoreArgs = {
 };
 
 
+export type MutationGetUploadSignatureArgs = {
+  input?: InputMaybe<SignatureInput>;
+};
+
+
 export type MutationLoginArgs = {
   input: LoginInput;
 };
@@ -158,6 +164,11 @@ export type MutationRecoverPasswordArgs = {
 
 export type MutationSignUpArgs = {
   input: SignUpInput;
+};
+
+
+export type MutationUploadVideoArgs = {
+  input: VideoUploadInput;
 };
 
 export type OptionTypeInput = {
@@ -280,8 +291,11 @@ export type Query = {
   getProductById: Product;
   getShop: Array<Companies>;
   getShopById: Companies;
+  getSignature: Signature;
   getUser: User;
   getUsers: Array<User>;
+  getVideoById: VideoUpload;
+  getVideos: Array<VideoUpload>;
 };
 
 
@@ -296,6 +310,11 @@ export type QueryGetProductByIdArgs = {
 
 
 export type QueryGetShopByIdArgs = {
+  _id: Scalars['ID']['input'];
+};
+
+
+export type QueryGetVideoByIdArgs = {
   _id: Scalars['ID']['input'];
 };
 
@@ -323,7 +342,11 @@ export type Signature = {
   cloudName: Scalars['String']['output'];
   folder: Scalars['String']['output'];
   signature: Scalars['String']['output'];
-  timestamp: Scalars['Int']['output'];
+  timestamp: Scalars['Float']['output'];
+};
+
+export type SignatureInput = {
+  folder: Scalars['String']['input'];
 };
 
 export type StoreInput = {
@@ -392,11 +415,38 @@ export type User = {
   updatedAt: Scalars['Date']['output'];
 };
 
+export type VideoUpload = {
+  __typename?: 'VideoUpload';
+  _id: Scalars['ID']['output'];
+  channelTitle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  duration?: Maybe<Scalars['String']['output']>;
+  likeCount?: Maybe<Scalars['Float']['output']>;
+  publishedAt?: Maybe<Scalars['Date']['output']>;
+  thumbnail?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  videoId?: Maybe<Scalars['String']['output']>;
+  viewCount?: Maybe<Scalars['Float']['output']>;
+  youtubeUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type VideoUploadInput = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  youtubeUrl: Scalars['String']['input'];
+};
+
+export type VideoUploadResponse = {
+  __typename?: 'VideoUploadResponse';
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+  video?: Maybe<VideoUpload>;
+};
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-export type Resolver<TResult, TParent = object, TContext = object, TArgs = object> = ResolverFn<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -433,21 +483,21 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = object, TContext = object, TArgs = object> =
+export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
   | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
-export type TypeResolveFn<TTypes, TParent = object, TContext = object> = (
+export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = object, TContext = object> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
-export type DirectiveResolverFn<TResult = object, TParent = object, TContext = object, TArgs = object> = (
+export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
   next: NextResolverFn<TResult>,
   parent: TParent,
   args: TArgs,
@@ -474,7 +524,7 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   LoginInput: LoginInput;
-  Mutation: ResolverTypeWrapper<object>;
+  Mutation: ResolverTypeWrapper<{}>;
   OptionTypeInput: OptionTypeInput;
   OptionTypes: ResolverTypeWrapper<OptionTypes>;
   Order: ResolverTypeWrapper<Order>;
@@ -485,11 +535,12 @@ export type ResolversTypes = {
   ProductResponse: ResolverTypeWrapper<ProductResponse>;
   Properties: ResolverTypeWrapper<Properties>;
   PropertyInput: PropertyInput;
-  Query: ResolverTypeWrapper<object>;
+  Query: ResolverTypeWrapper<{}>;
   RecoverPasswordInput: RecoverPasswordInput;
   Response: ResolverTypeWrapper<Response>;
   SignUpInput: SignUpInput;
   Signature: ResolverTypeWrapper<Signature>;
+  SignatureInput: SignatureInput;
   StoreInput: StoreInput;
   StoreResponse: ResolverTypeWrapper<StoreResponse>;
   Stores: ResolverTypeWrapper<Stores>;
@@ -497,6 +548,9 @@ export type ResolversTypes = {
   SubProperties: ResolverTypeWrapper<SubProperties>;
   SubPropertyInput: SubPropertyInput;
   User: ResolverTypeWrapper<User>;
+  VideoUpload: ResolverTypeWrapper<VideoUpload>;
+  VideoUploadInput: VideoUploadInput;
+  VideoUploadResponse: ResolverTypeWrapper<VideoUploadResponse>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -516,7 +570,7 @@ export type ResolversParentTypes = {
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   LoginInput: LoginInput;
-  Mutation: object;
+  Mutation: {};
   OptionTypeInput: OptionTypeInput;
   OptionTypes: OptionTypes;
   Order: Order;
@@ -527,11 +581,12 @@ export type ResolversParentTypes = {
   ProductResponse: ProductResponse;
   Properties: Properties;
   PropertyInput: PropertyInput;
-  Query: object;
+  Query: {};
   RecoverPasswordInput: RecoverPasswordInput;
   Response: Response;
   SignUpInput: SignUpInput;
   Signature: Signature;
+  SignatureInput: SignatureInput;
   StoreInput: StoreInput;
   StoreResponse: StoreResponse;
   Stores: Stores;
@@ -539,6 +594,9 @@ export type ResolversParentTypes = {
   SubProperties: SubProperties;
   SubPropertyInput: SubPropertyInput;
   User: User;
+  VideoUpload: VideoUpload;
+  VideoUploadInput: VideoUploadInput;
+  VideoUploadResponse: VideoUploadResponse;
 };
 
 export type AuthResponseResolvers<ContextType = Context, ParentType extends ResolversParentTypes['AuthResponse'] = ResolversParentTypes['AuthResponse']> = {
@@ -606,10 +664,11 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   createOrder?: Resolver<ResolversTypes['OrderResponse'], ParentType, ContextType, RequireFields<MutationCreateOrderArgs, 'input'>>;
   createProduct?: Resolver<ResolversTypes['ProductResponse'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
   createStore?: Resolver<ResolversTypes['StoreResponse'], ParentType, ContextType, RequireFields<MutationCreateStoreArgs, 'input'>>;
-  getUploadSignature?: Resolver<ResolversTypes['Signature'], ParentType, ContextType>;
+  getUploadSignature?: Resolver<ResolversTypes['Signature'], ParentType, ContextType, Partial<MutationGetUploadSignatureArgs>>;
   login?: Resolver<ResolversTypes['AuthResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'input'>>;
   recoverPassword?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationRecoverPasswordArgs, 'input'>>;
   signUp?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'input'>>;
+  uploadVideo?: Resolver<ResolversTypes['VideoUploadResponse'], ParentType, ContextType, RequireFields<MutationUploadVideoArgs, 'input'>>;
 };
 
 export type OptionTypesResolvers<ContextType = Context, ParentType extends ResolversParentTypes['OptionTypes'] = ResolversParentTypes['OptionTypes']> = {
@@ -691,8 +750,11 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
   getProductById?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryGetProductByIdArgs, '_id'>>;
   getShop?: Resolver<Array<ResolversTypes['Companies']>, ParentType, ContextType>;
   getShopById?: Resolver<ResolversTypes['Companies'], ParentType, ContextType, RequireFields<QueryGetShopByIdArgs, '_id'>>;
+  getSignature?: Resolver<ResolversTypes['Signature'], ParentType, ContextType>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   getUsers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
+  getVideoById?: Resolver<ResolversTypes['VideoUpload'], ParentType, ContextType, RequireFields<QueryGetVideoByIdArgs, '_id'>>;
+  getVideos?: Resolver<Array<ResolversTypes['VideoUpload']>, ParentType, ContextType>;
 };
 
 export type ResponseResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Response'] = ResolversParentTypes['Response']> = {
@@ -706,7 +768,7 @@ export type SignatureResolvers<ContextType = Context, ParentType extends Resolve
   cloudName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   folder?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   signature?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  timestamp?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  timestamp?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -763,6 +825,28 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type VideoUploadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['VideoUpload'] = ResolversParentTypes['VideoUpload']> = {
+  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  channelTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  duration?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  likeCount?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  publishedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  thumbnail?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  videoId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  viewCount?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  youtubeUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type VideoUploadResponseResolvers<ContextType = Context, ParentType extends ResolversParentTypes['VideoUploadResponse'] = ResolversParentTypes['VideoUploadResponse']> = {
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  video?: Resolver<Maybe<ResolversTypes['VideoUpload']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = Context> = {
   AuthResponse?: AuthResponseResolvers<ContextType>;
   Brand?: BrandResolvers<ContextType>;
@@ -785,5 +869,7 @@ export type Resolvers<ContextType = Context> = {
   Stores?: StoresResolvers<ContextType>;
   SubProperties?: SubPropertiesResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  VideoUpload?: VideoUploadResolvers<ContextType>;
+  VideoUploadResponse?: VideoUploadResponseResolvers<ContextType>;
 };
 

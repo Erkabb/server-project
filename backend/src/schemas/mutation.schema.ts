@@ -13,6 +13,7 @@ export const MutationAndQueriesTypeDefs = gql`
         createBrand(input: BrandInput!):BrandResponse!
         createStore(input: StoreInput!):StoreResponse!
         getUploadSignature(input: SignatureInput): Signature!
+        uploadVideo(input: VideoUploadInput!): VideoUploadResponse!
     }
     type Query {
         getUser: User!
@@ -25,5 +26,7 @@ export const MutationAndQueriesTypeDefs = gql`
         getShop: [Companies!]!
         getShopById(_id: ID!):Companies!
         getSignature: Signature!
+        getVideos: [VideoUpload!]!
+        getVideoById(_id: ID!): VideoUpload!
     }
 `

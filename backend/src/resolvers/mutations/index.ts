@@ -7,4 +7,4 @@ export * from './recoverPassword';
 export * from './create-shop';
 export * from './create-brand';
 export * from './create-store';
-export * from './signature';
+export * from './video-upload';
