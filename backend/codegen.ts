@@ -2,6 +2,9 @@ import {CodegenConfig} from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
     overwrite: true,
+    hooks: {
+        afterAllFileWrite: ['prettier --write'],
+    },
     schema: './src/schemas',
     generates: {
         'src/generated/graphql.ts': {
