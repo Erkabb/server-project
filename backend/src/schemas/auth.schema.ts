@@ -1,16 +1,16 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const typeDefs = gql`
   type User {
     _id: ID!
     email: String!
     password: String!
-    firstname:String
-    lastname:String
+    firstname: String
+    lastname: String
     role: String
     phoneNumber: String
     otp: String
-    newPassword:String
+    newPassword: String
     passwordResetToken: String
     passwordResetTokenExpire: String
     age: String
@@ -37,7 +37,7 @@ export const typeDefs = gql`
   }
   input ChangePasswordInput {
     password: String!
-    newPassword: String! 
+    newPassword: String!
   }
   input RecoverPasswordInput {
     password: String!
@@ -47,6 +47,13 @@ export const typeDefs = gql`
     firstname: String!
     lastname: String!
     email: String!
+    password: String!
+  }
+  input AddUserInput {
+    email: String!
+    firstname: String!
+    lastname: String
+    phoneNumber: String!
     password: String!
   }
   type Response {

@@ -37,6 +37,14 @@ export type Scalars = {
   Date: { input: any; output: any };
 };
 
+export type AddUserInput = {
+  email: Scalars["String"]["input"];
+  firstname: Scalars["String"]["input"];
+  lastname?: InputMaybe<Scalars["String"]["input"]>;
+  password: Scalars["String"]["input"];
+  phoneNumber: Scalars["String"]["input"];
+};
+
 export type AuthResponse = {
   __typename?: "AuthResponse";
   token: Scalars["String"]["output"];
@@ -116,6 +124,7 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  addUser: User;
   changePassword: Response;
   createBrand: BrandResponse;
   createCategory: Category;
@@ -128,6 +137,10 @@ export type Mutation = {
   recoverPassword: Response;
   signUp: User;
   uploadVideo: VideoUploadResponse;
+};
+
+export type MutationAddUserArgs = {
+  input: AddUserInput;
 };
 
 export type MutationChangePasswordArgs = {
@@ -553,6 +566,7 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AddUserInput: AddUserInput;
   AuthResponse: ResolverTypeWrapper<AuthResponse>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
   Brand: ResolverTypeWrapper<Brand>;
@@ -599,6 +613,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AddUserInput: AddUserInput;
   AuthResponse: AuthResponse;
   Boolean: Scalars["Boolean"]["output"];
   Brand: Brand;
@@ -746,6 +761,12 @@ export type MutationResolvers<
   ParentType extends
     ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"],
 > = {
+  addUser?: Resolver<
+    ResolversTypes["User"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationAddUserArgs, "input">
+  >;
   changePassword?: Resolver<
     ResolversTypes["Response"],
     ParentType,
