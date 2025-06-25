@@ -18,6 +18,7 @@ export const videoUploadTypeDefs = gql`
   input VideoUploadInput {
     title: String!
     youtubeUrl: String!
+    description: String
   }
 
   type VideoUploadResponse {

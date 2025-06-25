@@ -3,7 +3,7 @@ import {
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
 } from "graphql";
-import { Context } from "../types";
+import { Context } from "@/types";
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -434,6 +434,7 @@ export type VideoUpload = {
 };
 
 export type VideoUploadInput = {
+  description?: InputMaybe<Scalars["String"]["input"]>;
   title: Scalars["String"]["input"];
   youtubeUrl: Scalars["String"]["input"];
 };
