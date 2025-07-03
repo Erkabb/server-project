@@ -6,19 +6,30 @@ export const videoUploadTypeDefs = gql`
     title: String!
     description: String
     thumbnail: String
-    publishedAt: Date
-    duration: String
-    viewCount: Float
-    likeCount: Float
-    videoId: String
-    youtubeUrl: String!
+    unitPrice: Float
+    level: String!
+    category: String
+    youtubeUrl: YoutubeUrlType!
     channelTitle: String
   }
-
+  type YoutubeUrlType {
+    id: ID!
+    name: String
+    url: String
+  }
+  input YoutubeUrlInput {
+    name: String
+    url: String
+  }
   input VideoUploadInput {
+    unitPrice: Float
+    level: String
+    category: String
     title: String!
-    youtubeUrl: String!
+    youtubeUrl: YoutubeUrlInput!
     description: String
+    thumbnail: String
+    channelTitle: String
   }
 
   type VideoUploadResponse {

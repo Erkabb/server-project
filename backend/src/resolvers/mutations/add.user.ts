@@ -19,5 +19,6 @@ export const addUser: MutationResolvers["addUser"] = async (
     email,
     password,
     role: "user",
+    userLevel: input.userLevel,
   });
 };

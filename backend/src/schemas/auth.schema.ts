@@ -26,6 +26,7 @@ export const typeDefs = gql`
     companyPhoneNumber: String
     createdAt: Date!
     updatedAt: Date!
+    userLevel: String
   }
   type AuthResponse {
     user: User!
@@ -55,6 +56,7 @@ export const typeDefs = gql`
     lastname: String
     phoneNumber: String!
     password: String!
+    userLevel: String
   }
   type Response {
     message: String!
