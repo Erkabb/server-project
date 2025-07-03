@@ -21,12 +21,14 @@ type VideoUpload = {
   description: string;
   thumbnail: string;
   channelTitle: string;
-  publishedAt: Date;
-  duration: string;
-  viewCount: number;
-  likeCount: number;
-  videoId: string;
-  youtubeUrl: string;
+  youtubeUrl: {
+    url: string;
+    id: Schema.Types.ObjectId;
+    name: string;
+  };
+  unitPrice: number;
+  category: string;
+  level: string;
 };
 
 const videoUploadSchema = new Schema<VideoUpload>(
@@ -38,14 +40,16 @@ const videoUploadSchema = new Schema<VideoUpload>(
     description: String,
     thumbnail: String,
     channelTitle: String,
-    publishedAt: Date,
-    duration: String,
-    viewCount: Number,
-    likeCount: Number,
-    videoId: String,
     youtubeUrl: {
-      type: String,
-      required: true,
+      url: String,
+      name: String,
+    },
+    unitPrice: {
+      type: Number,
+    },
+    category: String,
+    level: {
+      enum: ["beginner", "advanced", "proficient"],
     },
   },
   { timestamps: true },

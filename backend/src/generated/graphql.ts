@@ -43,6 +43,7 @@ export type AddUserInput = {
   lastname?: InputMaybe<Scalars["String"]["input"]>;
   password: Scalars["String"]["input"];
   phoneNumber: Scalars["String"]["input"];
+  userLevel?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type AuthResponse = {
@@ -429,27 +430,31 @@ export type User = {
   role?: Maybe<Scalars["String"]["output"]>;
   status?: Maybe<Scalars["String"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
+  userLevel?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type VideoUpload = {
   __typename?: "VideoUpload";
   _id: Scalars["ID"]["output"];
+  category?: Maybe<Scalars["String"]["output"]>;
   channelTitle?: Maybe<Scalars["String"]["output"]>;
   description?: Maybe<Scalars["String"]["output"]>;
-  duration?: Maybe<Scalars["String"]["output"]>;
-  likeCount?: Maybe<Scalars["Float"]["output"]>;
-  publishedAt?: Maybe<Scalars["Date"]["output"]>;
+  level: Scalars["String"]["output"];
   thumbnail?: Maybe<Scalars["String"]["output"]>;
   title: Scalars["String"]["output"];
-  videoId?: Maybe<Scalars["String"]["output"]>;
-  viewCount?: Maybe<Scalars["Float"]["output"]>;
-  youtubeUrl: Scalars["String"]["output"];
+  unitPrice?: Maybe<Scalars["Float"]["output"]>;
+  youtubeUrl: YoutubeUrlType;
 };
 
 export type VideoUploadInput = {
+  category?: InputMaybe<Scalars["String"]["input"]>;
+  channelTitle?: InputMaybe<Scalars["String"]["input"]>;
   description?: InputMaybe<Scalars["String"]["input"]>;
+  level?: InputMaybe<Scalars["String"]["input"]>;
+  thumbnail?: InputMaybe<Scalars["String"]["input"]>;
   title: Scalars["String"]["input"];
-  youtubeUrl: Scalars["String"]["input"];
+  unitPrice?: InputMaybe<Scalars["Float"]["input"]>;
+  youtubeUrl: YoutubeUrlInput;
 };
 
 export type VideoUploadResponse = {
@@ -457,6 +462,18 @@ export type VideoUploadResponse = {
   message: Scalars["String"]["output"];
   success: Scalars["Boolean"]["output"];
   video?: Maybe<VideoUpload>;
+};
+
+export type YoutubeUrlInput = {
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  url?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type YoutubeUrlType = {
+  __typename?: "YoutubeUrlType";
+  id: Scalars["ID"]["output"];
+  name?: Maybe<Scalars["String"]["output"]>;
+  url?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -609,6 +626,8 @@ export type ResolversTypes = {
   VideoUpload: ResolverTypeWrapper<VideoUpload>;
   VideoUploadInput: VideoUploadInput;
   VideoUploadResponse: ResolverTypeWrapper<VideoUploadResponse>;
+  YoutubeUrlInput: YoutubeUrlInput;
+  YoutubeUrlType: ResolverTypeWrapper<YoutubeUrlType>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -656,6 +675,8 @@ export type ResolversParentTypes = {
   VideoUpload: VideoUpload;
   VideoUploadInput: VideoUploadInput;
   VideoUploadResponse: VideoUploadResponse;
+  YoutubeUrlInput: YoutubeUrlInput;
+  YoutubeUrlType: YoutubeUrlType;
 };
 
 export type AuthResponseResolvers<
@@ -1192,6 +1213,11 @@ export type UserResolvers<
   role?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  userLevel?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1201,6 +1227,7 @@ export type VideoUploadResolvers<
     ResolversParentTypes["VideoUpload"] = ResolversParentTypes["VideoUpload"],
 > = {
   _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  category?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   channelTitle?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
@@ -1211,22 +1238,19 @@ export type VideoUploadResolvers<
     ParentType,
     ContextType
   >;
-  duration?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  likeCount?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  publishedAt?: Resolver<
-    Maybe<ResolversTypes["Date"]>,
-    ParentType,
-    ContextType
-  >;
+  level?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   thumbnail?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
   title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  videoId?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  viewCount?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
-  youtubeUrl?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  unitPrice?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  youtubeUrl?: Resolver<
+    ResolversTypes["YoutubeUrlType"],
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1242,6 +1266,17 @@ export type VideoUploadResponseResolvers<
     ParentType,
     ContextType
   >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type YoutubeUrlTypeResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["YoutubeUrlType"] = ResolversParentTypes["YoutubeUrlType"],
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1269,4 +1304,5 @@ export type Resolvers<ContextType = Context> = {
   User?: UserResolvers<ContextType>;
   VideoUpload?: VideoUploadResolvers<ContextType>;
   VideoUploadResponse?: VideoUploadResponseResolvers<ContextType>;
+  YoutubeUrlType?: YoutubeUrlTypeResolvers<ContextType>;
 };
