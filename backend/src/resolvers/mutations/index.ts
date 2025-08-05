@@ -9,3 +9,4 @@ export * from "./create-brand";
 export * from "./create-store";
 export * from "./video-upload";
 export * from "./add.user";
+export * from './create.job.ad';

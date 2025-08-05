@@ -15,6 +15,7 @@ export const MutationAndQueriesTypeDefs = gql`
     getUploadSignature(input: SignatureInput): Signature!
     uploadVideo(input: VideoUploadInput!): VideoUploadResponse!
     addUser(input: AddUserInput!): User!
+    createJobAd(input: CreateJobAdInput!): JobAdResponse!
   }
   type Query {
     getUser: User!
@@ -29,5 +30,7 @@ export const MutationAndQueriesTypeDefs = gql`
     getSignature: Signature!
     getVideos: [VideoUpload!]!
     getVideoById(_id: ID!): VideoUpload!
+    getJobAds: [JobAd!]!
+    getJobAdById(_id: ID!): JobAd
   }
 `;

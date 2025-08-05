@@ -5,3 +5,4 @@ export * from './order.model';
 export * from './company.model';
 export * from './brand.model';
 export * from './youtube-video.model';
+export * from './jobAd.model';

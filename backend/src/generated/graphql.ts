@@ -118,6 +118,33 @@ export type CompanyResponse = {
   message: Scalars["String"]["output"];
 };
 
+export type CreateJobAdInput = {
+  company: Scalars["String"]["input"];
+  description: Scalars["String"]["input"];
+  location: Scalars["String"]["input"];
+  salary?: InputMaybe<Scalars["Float"]["input"]>;
+  title: Scalars["String"]["input"];
+};
+
+export type JobAd = {
+  __typename?: "JobAd";
+  _id: Scalars["ID"]["output"];
+  company: Scalars["String"]["output"];
+  createdAt: Scalars["Date"]["output"];
+  description: Scalars["String"]["output"];
+  location: Scalars["String"]["output"];
+  postedBy: User;
+  salary?: Maybe<Scalars["Float"]["output"]>;
+  title: Scalars["String"]["output"];
+  updatedAt: Scalars["Date"]["output"];
+};
+
+export type JobAdResponse = {
+  __typename?: "JobAdResponse";
+  jobAd?: Maybe<JobAd>;
+  message?: Maybe<Scalars["String"]["output"]>;
+};
+
 export type LoginInput = {
   email: Scalars["String"]["input"];
   password: Scalars["String"]["input"];
@@ -130,6 +157,7 @@ export type Mutation = {
   createBrand: BrandResponse;
   createCategory: Category;
   createCompany: CompanyResponse;
+  createJobAd: JobAdResponse;
   createOrder: OrderResponse;
   createProduct: ProductResponse;
   createStore: StoreResponse;
@@ -158,6 +186,10 @@ export type MutationCreateCategoryArgs = {
 
 export type MutationCreateCompanyArgs = {
   input: CompanyInput;
+};
+
+export type MutationCreateJobAdArgs = {
+  input: CreateJobAdInput;
 };
 
 export type MutationCreateOrderArgs = {
@@ -307,6 +339,8 @@ export type Query = {
   __typename?: "Query";
   getCategories: Array<Maybe<Category>>;
   getCategory: Array<Category>;
+  getJobAdById?: Maybe<JobAd>;
+  getJobAds: Array<JobAd>;
   getOrder: Array<Order>;
   getProduct: Array<Product>;
   getProductById: Product;
@@ -320,6 +354,10 @@ export type Query = {
 };
 
 export type QueryGetCategoryArgs = {
+  _id: Scalars["ID"]["input"];
+};
+
+export type QueryGetJobAdByIdArgs = {
   _id: Scalars["ID"]["input"];
 };
 
@@ -594,10 +632,13 @@ export type ResolversTypes = {
   Companies: ResolverTypeWrapper<Companies>;
   CompanyInput: CompanyInput;
   CompanyResponse: ResolverTypeWrapper<CompanyResponse>;
+  CreateJobAdInput: CreateJobAdInput;
   Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
   Float: ResolverTypeWrapper<Scalars["Float"]["output"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  JobAd: ResolverTypeWrapper<JobAd>;
+  JobAdResponse: ResolverTypeWrapper<JobAdResponse>;
   LoginInput: LoginInput;
   Mutation: ResolverTypeWrapper<{}>;
   OptionTypeInput: OptionTypeInput;
@@ -643,10 +684,13 @@ export type ResolversParentTypes = {
   Companies: Companies;
   CompanyInput: CompanyInput;
   CompanyResponse: CompanyResponse;
+  CreateJobAdInput: CreateJobAdInput;
   Date: Scalars["Date"]["output"];
   Float: Scalars["Float"]["output"];
   ID: Scalars["ID"]["output"];
   Int: Scalars["Int"]["output"];
+  JobAd: JobAd;
+  JobAdResponse: JobAdResponse;
   LoginInput: LoginInput;
   Mutation: {};
   OptionTypeInput: OptionTypeInput;
@@ -777,6 +821,33 @@ export interface DateScalarConfig
   name: "Date";
 }
 
+export type JobAdResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["JobAd"] = ResolversParentTypes["JobAd"],
+> = {
+  _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  company?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  location?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  postedBy?: Resolver<ResolversTypes["User"], ParentType, ContextType>;
+  salary?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type JobAdResponseResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["JobAdResponse"] = ResolversParentTypes["JobAdResponse"],
+> = {
+  jobAd?: Resolver<Maybe<ResolversTypes["JobAd"]>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<
   ContextType = Context,
   ParentType extends
@@ -811,6 +882,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateCompanyArgs, "input">
+  >;
+  createJobAd?: Resolver<
+    ResolversTypes["JobAdResponse"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateJobAdArgs, "input">
   >;
   createOrder?: Resolver<
     ResolversTypes["OrderResponse"],
@@ -1033,6 +1110,13 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryGetCategoryArgs, "_id">
   >;
+  getJobAdById?: Resolver<
+    Maybe<ResolversTypes["JobAd"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetJobAdByIdArgs, "_id">
+  >;
+  getJobAds?: Resolver<Array<ResolversTypes["JobAd"]>, ParentType, ContextType>;
   getOrder?: Resolver<Array<ResolversTypes["Order"]>, ParentType, ContextType>;
   getProduct?: Resolver<
     Array<ResolversTypes["Product"]>,
@@ -1288,6 +1372,8 @@ export type Resolvers<ContextType = Context> = {
   Companies?: CompaniesResolvers<ContextType>;
   CompanyResponse?: CompanyResponseResolvers<ContextType>;
   Date?: GraphQLScalarType;
+  JobAd?: JobAdResolvers<ContextType>;
+  JobAdResponse?: JobAdResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   OptionTypes?: OptionTypesResolvers<ContextType>;
   Order?: OrderResolvers<ContextType>;

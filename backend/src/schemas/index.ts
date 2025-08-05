@@ -9,5 +9,6 @@ import {brandTypeDef} from "@/schemas/brands.schema";
 import {storeTypeDefs} from "@/schemas/stores.schema";
 import {signatureTypeDefs} from "@/schemas/signature.schema";
 import {videoUploadTypeDefs} from "@/schemas/videoupload.schema";
+import {jobAdTypeDef} from "@/schemas/jobad.schema";
 
-export const typeDefs = mergeTypeDefs([AuthTypeDefs, ProductTypeDefs, CategoryTypeDefs, OrderTypeDefs, companyTypeDef, MutationAndQueriesTypeDefs, brandTypeDef, storeTypeDefs, signatureTypeDefs, videoUploadTypeDefs]);
+export const typeDefs = mergeTypeDefs([AuthTypeDefs, ProductTypeDefs, CategoryTypeDefs, OrderTypeDefs, companyTypeDef, MutationAndQueriesTypeDefs, brandTypeDef, storeTypeDefs, signatureTypeDefs, videoUploadTypeDefs, jobAdTypeDef]);
