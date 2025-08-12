@@ -22,7 +22,8 @@ export const MutationAndQueriesTypeDefs = gql`
     getUsers: [User!]!
     getCategory(_id: ID!): [Category!]!
     getCategories: [Category]!
-    getOrder: [Order!]!
+    getOrderById(_id: ID!): [Order!]!
+      getOrders: [Order!]!
     getProduct: [Product!]!
     getProductById(_id: ID!): Product!
     getShop: [Companies!]!

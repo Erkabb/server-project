@@ -341,7 +341,8 @@ export type Query = {
   getCategory: Array<Category>;
   getJobAdById?: Maybe<JobAd>;
   getJobAds: Array<JobAd>;
-  getOrder: Array<Order>;
+  getOrderById: Array<Order>;
+  getOrders: Array<Order>;
   getProduct: Array<Product>;
   getProductById: Product;
   getShop: Array<Companies>;
@@ -358,6 +359,10 @@ export type QueryGetCategoryArgs = {
 };
 
 export type QueryGetJobAdByIdArgs = {
+  _id: Scalars["ID"]["input"];
+};
+
+export type QueryGetOrderByIdArgs = {
   _id: Scalars["ID"]["input"];
 };
 
@@ -1117,7 +1122,13 @@ export type QueryResolvers<
     RequireFields<QueryGetJobAdByIdArgs, "_id">
   >;
   getJobAds?: Resolver<Array<ResolversTypes["JobAd"]>, ParentType, ContextType>;
-  getOrder?: Resolver<Array<ResolversTypes["Order"]>, ParentType, ContextType>;
+  getOrderById?: Resolver<
+    Array<ResolversTypes["Order"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetOrderByIdArgs, "_id">
+  >;
+  getOrders?: Resolver<Array<ResolversTypes["Order"]>, ParentType, ContextType>;
   getProduct?: Resolver<
     Array<ResolversTypes["Product"]>,
     ParentType,
