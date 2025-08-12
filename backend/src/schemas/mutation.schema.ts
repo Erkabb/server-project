@@ -18,7 +18,7 @@ export const MutationAndQueriesTypeDefs = gql`
     createJobAd(input: CreateJobAdInput!): JobAdResponse!
   }
   type Query {
-    getUser: User!
+    getUserById(_id: ID!): User!
     getUsers: [User!]!
     getCategory(_id: ID!): [Category!]!
     getCategories: [Category]!

@@ -348,7 +348,7 @@ export type Query = {
   getShop: Array<Companies>;
   getShopById: Companies;
   getSignature: Signature;
-  getUser: User;
+  getUserById: User;
   getUsers: Array<User>;
   getVideoById: VideoUpload;
   getVideos: Array<VideoUpload>;
@@ -371,6 +371,10 @@ export type QueryGetProductByIdArgs = {
 };
 
 export type QueryGetShopByIdArgs = {
+  _id: Scalars["ID"]["input"];
+};
+
+export type QueryGetUserByIdArgs = {
   _id: Scalars["ID"]["input"];
 };
 
@@ -1152,7 +1156,12 @@ export type QueryResolvers<
     RequireFields<QueryGetShopByIdArgs, "_id">
   >;
   getSignature?: Resolver<ResolversTypes["Signature"], ParentType, ContextType>;
-  getUser?: Resolver<ResolversTypes["User"], ParentType, ContextType>;
+  getUserById?: Resolver<
+    ResolversTypes["User"],
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetUserByIdArgs, "_id">
+  >;
   getUsers?: Resolver<Array<ResolversTypes["User"]>, ParentType, ContextType>;
   getVideoById?: Resolver<
     ResolversTypes["VideoUpload"],
