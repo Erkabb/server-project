@@ -7,7 +7,7 @@ export const videoUploadTypeDefs = gql`
     description: String
     thumbnail: String
     unitPrice: Float
-    level: String!
+    level: String
     category: String
     youtubeUrl: YoutubeUrlType!
     channelTitle: String

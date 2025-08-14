@@ -489,7 +489,7 @@ export type VideoUpload = {
   category?: Maybe<Scalars["String"]["output"]>;
   channelTitle?: Maybe<Scalars["String"]["output"]>;
   description?: Maybe<Scalars["String"]["output"]>;
-  level: Scalars["String"]["output"];
+  level?: Maybe<Scalars["String"]["output"]>;
   thumbnail?: Maybe<Scalars["String"]["output"]>;
   title: Scalars["String"]["output"];
   unitPrice?: Maybe<Scalars["Float"]["output"]>;
@@ -1358,7 +1358,7 @@ export type VideoUploadResolvers<
     ParentType,
     ContextType
   >;
-  level?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   thumbnail?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,

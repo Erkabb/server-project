@@ -49,6 +49,7 @@ const videoUploadSchema = new Schema<VideoUpload>(
     },
     category: String,
     level: {
+        type: String,
       enum: ["beginner", "advanced", "proficient"],
     },
   },
