@@ -7,8 +7,18 @@ import { connectToDb } from '@/utils/connect-to-db';
 import { Context } from '@/types';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { NextResponse } from "next/server";
+import cors from 'cors';
+import express from 'express';
 
 connectToDb();
+
+const app = express();
+
+app.use(cors({
+  origin: process.env.VITE_API_BASE_URL,
+  methods: ['GET', 'POST', 'OPTIONS'],
+}))
+
 
 const server = new ApolloServer<Context>({
   resolvers,
@@ -20,7 +30,7 @@ const handler=startServerAndCreateNextHandler<NextRequest, Context>(server, {
   context: async (req) => {
     const token = req.headers.get('authorization') || '';
 
-    let userId = null;
+    let userId: null;
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
@@ -62,4 +72,4 @@ export async function POST(request: NextRequest) {
   response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
   response.headers.set("Access-Control-Allow-Credentials", "true");
   return response;
-};
+}
