@@ -27,6 +27,7 @@ type Product = {
     discount: number;
     category: Schema.Types.ObjectId[];
     quantity: number;
+    link: string;
 };
 
 const productSchema = new Schema<Product>({
@@ -95,6 +96,7 @@ const productSchema = new Schema<Product>({
             type: Number,
         required: true,
     },
+    link: String
     },
     {
         timestamps: true,

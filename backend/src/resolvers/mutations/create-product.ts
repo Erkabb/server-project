@@ -36,6 +36,7 @@ export const createProduct: MutationResolvers['createProduct'] = async (_, { inp
             category: categoryFind,
             store: findStore,
             quantity: input.quantity,
+            link: input.link,
             productProperties: input.productProperties ? {
                 position: input.productProperties.position,
                 value: input.productProperties.value,

@@ -291,6 +291,7 @@ export type Product = {
   createdAt: Scalars["Date"]["output"];
   detail?: Maybe<Scalars["String"]["output"]>;
   discount?: Maybe<Scalars["Float"]["output"]>;
+  link?: Maybe<Scalars["String"]["output"]>;
   name: Scalars["String"]["output"];
   optionTypes?: Maybe<OptionTypes>;
   productProperties?: Maybe<Properties>;
@@ -307,6 +308,7 @@ export type ProductInput = {
   category: Array<Scalars["ID"]["input"]>;
   detail?: InputMaybe<Scalars["String"]["input"]>;
   discount?: InputMaybe<Scalars["Float"]["input"]>;
+  link?: InputMaybe<Scalars["String"]["input"]>;
   name: Scalars["String"]["input"];
   optionTypes?: InputMaybe<OptionTypeInput>;
   productProperties?: InputMaybe<PropertyInput>;
@@ -1054,6 +1056,7 @@ export type ProductResolvers<
   createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
   detail?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   discount?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  link?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   optionTypes?: Resolver<
     Maybe<ResolversTypes["OptionTypes"]>,

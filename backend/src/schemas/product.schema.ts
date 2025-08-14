@@ -17,6 +17,7 @@ export const typeDefs = gql`
         productProperties: Properties
         store: [ID!]
         quantity: Int!
+        link: String
     }
     type OptionTypes {
         size: [String]
@@ -64,6 +65,7 @@ export const typeDefs = gql`
         store: [ID!]
         quantity: Int!
         productProperties: PropertyInput
+        link: String
     }
     type ProductResponse {
         message:String!
