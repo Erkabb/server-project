@@ -7,6 +7,6 @@ export const getProductById:QueryResolvers['getProductById']=async(_, {_id})=>{
 }
 
 export const getProduct:QueryResolvers['getProduct']=async()=>{
-    return Product.find({});
+    return Product.find();
 
 }

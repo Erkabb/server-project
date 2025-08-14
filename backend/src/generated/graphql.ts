@@ -62,8 +62,8 @@ export type Brand = {
 };
 
 export type BrandInput = {
-  brandLogo: Scalars["String"]["input"];
-  name: Scalars["String"]["input"];
+  brandLogo?: InputMaybe<Scalars["String"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type BrandResponse = {
@@ -286,8 +286,8 @@ export type OrderResponse = {
 export type Product = {
   __typename?: "Product";
   _id: Scalars["ID"]["output"];
-  brand: Array<Scalars["ID"]["output"]>;
-  category: Array<Scalars["ID"]["output"]>;
+  brand?: Maybe<Array<Scalars["ID"]["output"]>>;
+  category?: Maybe<Array<Scalars["ID"]["output"]>>;
   createdAt: Scalars["Date"]["output"];
   detail?: Maybe<Scalars["String"]["output"]>;
   discount?: Maybe<Scalars["Float"]["output"]>;
@@ -295,27 +295,27 @@ export type Product = {
   name: Scalars["String"]["output"];
   optionTypes?: Maybe<OptionTypes>;
   productProperties?: Maybe<Properties>;
-  quantity: Scalars["Int"]["output"];
+  quantity?: Maybe<Scalars["Int"]["output"]>;
   soldQuantity?: Maybe<Scalars["Int"]["output"]>;
   store?: Maybe<Array<Scalars["ID"]["output"]>>;
-  totalQuantity: Scalars["Int"]["output"];
-  unitPrice: Scalars["Float"]["output"];
+  totalQuantity?: Maybe<Scalars["Int"]["output"]>;
+  unitPrice?: Maybe<Scalars["Float"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
 };
 
 export type ProductInput = {
   brand?: InputMaybe<Array<Scalars["ID"]["input"]>>;
-  category: Array<Scalars["ID"]["input"]>;
+  category?: InputMaybe<Array<Scalars["ID"]["input"]>>;
   detail?: InputMaybe<Scalars["String"]["input"]>;
   discount?: InputMaybe<Scalars["Float"]["input"]>;
   link?: InputMaybe<Scalars["String"]["input"]>;
-  name: Scalars["String"]["input"];
+  name?: InputMaybe<Scalars["String"]["input"]>;
   optionTypes?: InputMaybe<OptionTypeInput>;
   productProperties?: InputMaybe<PropertyInput>;
-  quantity: Scalars["Int"]["input"];
+  quantity?: InputMaybe<Scalars["Int"]["input"]>;
   store?: InputMaybe<Array<Scalars["ID"]["input"]>>;
-  totalQuantity: Scalars["Int"]["input"];
-  unitPrice: Scalars["Float"]["input"];
+  totalQuantity?: InputMaybe<Scalars["Int"]["input"]>;
+  unitPrice?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
 export type ProductResponse = {
@@ -325,16 +325,17 @@ export type ProductResponse = {
 
 export type Properties = {
   __typename?: "Properties";
-  _id: Scalars["ID"]["output"];
-  position: Scalars["String"]["output"];
-  properties: SubProperties;
-  value: Scalars["String"]["output"];
+  _id?: Maybe<Scalars["ID"]["output"]>;
+  position?: Maybe<Scalars["String"]["output"]>;
+  properties?: Maybe<SubProperties>;
+  value?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type PropertyInput = {
-  position: Scalars["String"]["input"];
-  properties: SubPropertyInput;
-  value: Scalars["String"]["input"];
+  _id?: InputMaybe<Scalars["ID"]["input"]>;
+  position?: InputMaybe<Scalars["String"]["input"]>;
+  properties?: InputMaybe<SubPropertyInput>;
+  value?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type Query = {
@@ -443,14 +444,14 @@ export type Stores = {
 
 export type SubProperties = {
   __typename?: "SubProperties";
-  _id: Scalars["ID"]["output"];
-  name: Scalars["String"]["output"];
-  presentation: Scalars["String"]["output"];
+  _id?: Maybe<Scalars["ID"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  presentation?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type SubPropertyInput = {
-  name: Scalars["String"]["input"];
-  presentation: Scalars["String"]["input"];
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  presentation?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type User = {
@@ -1051,8 +1052,12 @@ export type ProductResolvers<
     ResolversParentTypes["Product"] = ResolversParentTypes["Product"],
 > = {
   _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  brand?: Resolver<Array<ResolversTypes["ID"]>, ParentType, ContextType>;
-  category?: Resolver<Array<ResolversTypes["ID"]>, ParentType, ContextType>;
+  brand?: Resolver<Maybe<Array<ResolversTypes["ID"]>>, ParentType, ContextType>;
+  category?: Resolver<
+    Maybe<Array<ResolversTypes["ID"]>>,
+    ParentType,
+    ContextType
+  >;
   createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
   detail?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   discount?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
@@ -1068,15 +1073,19 @@ export type ProductResolvers<
     ParentType,
     ContextType
   >;
-  quantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  quantity?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   soldQuantity?: Resolver<
     Maybe<ResolversTypes["Int"]>,
     ParentType,
     ContextType
   >;
   store?: Resolver<Maybe<Array<ResolversTypes["ID"]>>, ParentType, ContextType>;
-  totalQuantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
-  unitPrice?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  totalQuantity?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  unitPrice?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -1095,14 +1104,14 @@ export type PropertiesResolvers<
   ParentType extends
     ResolversParentTypes["Properties"] = ResolversParentTypes["Properties"],
 > = {
-  _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  position?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  _id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  position?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   properties?: Resolver<
-    ResolversTypes["SubProperties"],
+    Maybe<ResolversTypes["SubProperties"]>,
     ParentType,
     ContextType
   >;
-  value?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1245,9 +1254,13 @@ export type SubPropertiesResolvers<
   ParentType extends
     ResolversParentTypes["SubProperties"] = ResolversParentTypes["SubProperties"],
 > = {
-  _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  presentation?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  _id?: Resolver<Maybe<ResolversTypes["ID"]>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  presentation?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

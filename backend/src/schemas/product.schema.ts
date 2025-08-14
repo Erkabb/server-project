@@ -5,18 +5,18 @@ export const typeDefs = gql`
         _id:ID!
         name:String!
         detail:String
-        unitPrice:Float!
+        unitPrice:Float
         optionTypes: OptionTypes
         soldQuantity:Int
-        totalQuantity:Int!
+        totalQuantity:Int
         discount:Float
-        brand: [ID!]!
-        category:[ID!]!
+        brand: [ID!]
+        category:[ID!]
         createdAt: Date!
         updatedAt: Date!
         productProperties: Properties
         store: [ID!]
-        quantity: Int!
+        quantity: Int
         link: String
     }
     type OptionTypes {
@@ -30,40 +30,41 @@ export const typeDefs = gql`
         color: [String]
     }
     type Properties {
-        _id: ID!
-        position: String!
-        value: String!
-        properties: SubProperties!
+        _id: ID
+        position: String
+        value: String
+        properties: SubProperties
       }
     type SubProperties {
-        _id: ID!
-        name: String!
-        presentation: String!
+        _id: ID
+        name: String
+        presentation: String
     }
     input SubPropertyInput {
-        name: String!
-        presentation: String!
+        name: String
+        presentation: String
     }
     input PropertyInput {
-        position: String!
-        value: String!
-        properties: SubPropertyInput!
+        _id: ID
+        position: String
+        value: String
+        properties: SubPropertyInput
     }
     input BrandInput {
-        name:String!
-        brandLogo:String!
+        name:String
+        brandLogo:String
     }
     input ProductInput {
-        name:String!
+        name:String
         detail:String
-        unitPrice:Float!
+        unitPrice:Float
         optionTypes: OptionTypeInput
-        totalQuantity:Int!
-        brand: [ID!] 
+        totalQuantity:Int
+        brand: [ID!]
         discount:Float
-        category:[ID!]!
+        category:[ID!]
         store: [ID!]
-        quantity: Int!
+        quantity: Int
         productProperties: PropertyInput
         link: String
     }
