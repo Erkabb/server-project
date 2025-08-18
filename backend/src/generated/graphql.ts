@@ -76,8 +76,24 @@ export type Category = {
   _id: Scalars["ID"]["output"];
   categoryName: Scalars["String"]["output"];
   createdAt: Scalars["Date"]["output"];
+  description?: Maybe<Scalars["String"]["output"]>;
+  image?: Maybe<Scalars["String"]["output"]>;
+  link?: Maybe<Scalars["String"]["output"]>;
   totalProducts?: Maybe<Scalars["Int"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
+};
+
+export type CategoryInput = {
+  categoryName: Scalars["String"]["input"];
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  image?: InputMaybe<Scalars["String"]["input"]>;
+  link?: InputMaybe<Scalars["String"]["input"]>;
+  totalProducts?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type CategoryResponse = {
+  __typename?: "CategoryResponse";
+  messages: Scalars["String"]["output"];
 };
 
 export type ChangePasswordInput = {
@@ -155,7 +171,7 @@ export type Mutation = {
   addUser: User;
   changePassword: Response;
   createBrand: BrandResponse;
-  createCategory: Category;
+  createCategory: CategoryResponse;
   createCompany: CompanyResponse;
   createJobAd: JobAdResponse;
   createOrder: OrderResponse;
@@ -181,7 +197,7 @@ export type MutationCreateBrandArgs = {
 };
 
 export type MutationCreateCategoryArgs = {
-  categoryName: Scalars["String"]["input"];
+  input: CategoryInput;
 };
 
 export type MutationCreateCompanyArgs = {
@@ -640,6 +656,8 @@ export type ResolversTypes = {
   BrandInput: BrandInput;
   BrandResponse: ResolverTypeWrapper<BrandResponse>;
   Category: ResolverTypeWrapper<Category>;
+  CategoryInput: CategoryInput;
+  CategoryResponse: ResolverTypeWrapper<CategoryResponse>;
   ChangePasswordInput: ChangePasswordInput;
   Companies: ResolverTypeWrapper<Companies>;
   CompanyInput: CompanyInput;
@@ -692,6 +710,8 @@ export type ResolversParentTypes = {
   BrandInput: BrandInput;
   BrandResponse: BrandResponse;
   Category: Category;
+  CategoryInput: CategoryInput;
+  CategoryResponse: CategoryResponse;
   ChangePasswordInput: ChangePasswordInput;
   Companies: Companies;
   CompanyInput: CompanyInput;
@@ -779,12 +799,28 @@ export type CategoryResolvers<
   _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   categoryName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  image?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  link?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   totalProducts?: Resolver<
     Maybe<ResolversTypes["Int"]>,
     ParentType,
     ContextType
   >;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CategoryResponseResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["CategoryResponse"] = ResolversParentTypes["CategoryResponse"],
+> = {
+  messages?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -884,10 +920,10 @@ export type MutationResolvers<
     RequireFields<MutationCreateBrandArgs, "input">
   >;
   createCategory?: Resolver<
-    ResolversTypes["Category"],
+    ResolversTypes["CategoryResponse"],
     ParentType,
     ContextType,
-    RequireFields<MutationCreateCategoryArgs, "categoryName">
+    RequireFields<MutationCreateCategoryArgs, "input">
   >;
   createCompany?: Resolver<
     ResolversTypes["CompanyResponse"],
@@ -1405,6 +1441,7 @@ export type Resolvers<ContextType = Context> = {
   Brand?: BrandResolvers<ContextType>;
   BrandResponse?: BrandResponseResolvers<ContextType>;
   Category?: CategoryResolvers<ContextType>;
+  CategoryResponse?: CategoryResponseResolvers<ContextType>;
   Companies?: CompaniesResolvers<ContextType>;
   CompanyResponse?: CompanyResponseResolvers<ContextType>;
   Date?: GraphQLScalarType;

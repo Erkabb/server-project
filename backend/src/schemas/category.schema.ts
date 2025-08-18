@@ -8,5 +8,19 @@ scalar Date
         createdAt: Date!
         updatedAt: Date!
         totalProducts:Int
+        description:String
+        image:String
+        link:String
+    }
+
+    input CategoryInput {
+        categoryName:String!
+        description:String
+        totalProducts:Int
+        image:String
+        link:String
+    }
+    type CategoryResponse {
+        messages:String!
     }
 `

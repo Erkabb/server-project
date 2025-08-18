@@ -3,7 +3,10 @@ import {models, model, Schema} from 'mongoose';
 type Category={
     _id:Schema.Types.ObjectId;
     categoryName:string;
-    totalProducts: number
+    totalProducts: number;
+    description: string;
+    image: string;
+    link: string;
 };
 const categorySchema=new Schema<Category>({
     categoryName:{
@@ -13,6 +16,17 @@ const categorySchema=new Schema<Category>({
     totalProducts: {
         type: Number,
         default: 0
+    },
+    description: {
+        type: String,
+        default: null
+    },
+    image: {
+        type: String,
+        default: null
+    },
+    link: {
+        type: String,
     }
 },
     {

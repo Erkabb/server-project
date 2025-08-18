@@ -6,7 +6,7 @@ export const MutationAndQueriesTypeDefs = gql`
     login(input: LoginInput!): AuthResponse!
     changePassword(input: ChangePasswordInput!): Response!
     recoverPassword(input: RecoverPasswordInput!): Response!
-    createCategory(categoryName: String!): Category!
+    createCategory(input: CategoryInput!): CategoryResponse!
     createOrder(input: OrderInput!): OrderResponse!
     createProduct(input: ProductInput!): ProductResponse!
     createCompany(input: CompanyInput!): CompanyResponse!

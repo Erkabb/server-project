@@ -11,6 +11,6 @@ export const createBrand: MutationResolvers['createBrand']=async (_, {input}, {u
         brandLogo: input.brandLogo,
     });
     return {
-        messages: 'Brand succesfully created',
+        messages: 'Brand successfully created',
     }
 }
