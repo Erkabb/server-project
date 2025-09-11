@@ -33,5 +33,6 @@ const categorySchema = new Schema<Category>(
   },
 );
 
-export const Category =
+const Category =
   models["Category"] || model<Category>("Category", categorySchema);
+export default Category;
