@@ -13,6 +13,7 @@ export const typeDefs = gql`
     icon: String
     iconColor: String
     badge: String
+    description: String
   }
 
   input CategoryInput {
@@ -22,5 +23,6 @@ export const typeDefs = gql`
     icon: String
     iconColor: String
     badge: String
+    description: String
   }
 `;

@@ -79,6 +79,7 @@ export type Category = {
   categoryName: Scalars["String"]["output"];
   color?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["Date"]["output"];
+  description?: Maybe<Scalars["String"]["output"]>;
   icon?: Maybe<Scalars["String"]["output"]>;
   iconColor?: Maybe<Scalars["String"]["output"]>;
   totalProducts?: Maybe<Scalars["Int"]["output"]>;
@@ -90,6 +91,7 @@ export type CategoryInput = {
   borderColor?: InputMaybe<Scalars["String"]["input"]>;
   categoryName: Scalars["String"]["input"];
   color?: InputMaybe<Scalars["String"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
   icon?: InputMaybe<Scalars["String"]["input"]>;
   iconColor?: InputMaybe<Scalars["String"]["input"]>;
 };
@@ -802,6 +804,11 @@ export type CategoryResolvers<
   categoryName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   color?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   icon?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   iconColor?: Resolver<
     Maybe<ResolversTypes["String"]>,

@@ -9,6 +9,7 @@ type Category = {
   badge: string;
   icon: string;
   iconColor: string;
+  description: string;
 };
 const categorySchema = new Schema<Category>(
   {
@@ -25,12 +26,12 @@ const categorySchema = new Schema<Category>(
     borderColor: String,
     badge: String,
     iconColor: String,
+    description: String,
   },
   {
     timestamps: true,
   },
 );
 
-const Category =
+export const Category =
   models["Category"] || model<Category>("Category", categorySchema);
-export default Category;
