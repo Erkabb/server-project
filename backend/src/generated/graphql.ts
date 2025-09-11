@@ -74,10 +74,24 @@ export type BrandResponse = {
 export type Category = {
   __typename?: "Category";
   _id: Scalars["ID"]["output"];
+  badge?: Maybe<Scalars["String"]["output"]>;
+  borderColor?: Maybe<Scalars["String"]["output"]>;
   categoryName: Scalars["String"]["output"];
+  color?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["Date"]["output"];
+  icon?: Maybe<Scalars["String"]["output"]>;
+  iconColor?: Maybe<Scalars["String"]["output"]>;
   totalProducts?: Maybe<Scalars["Int"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
+};
+
+export type CategoryInput = {
+  badge?: InputMaybe<Scalars["String"]["input"]>;
+  borderColor?: InputMaybe<Scalars["String"]["input"]>;
+  categoryName: Scalars["String"]["input"];
+  color?: InputMaybe<Scalars["String"]["input"]>;
+  icon?: InputMaybe<Scalars["String"]["input"]>;
+  iconColor?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ChangePasswordInput = {
@@ -181,7 +195,7 @@ export type MutationCreateBrandArgs = {
 };
 
 export type MutationCreateCategoryArgs = {
-  categoryName: Scalars["String"]["input"];
+  input: CategoryInput;
 };
 
 export type MutationCreateCompanyArgs = {
@@ -640,6 +654,7 @@ export type ResolversTypes = {
   BrandInput: BrandInput;
   BrandResponse: ResolverTypeWrapper<BrandResponse>;
   Category: ResolverTypeWrapper<Category>;
+  CategoryInput: CategoryInput;
   ChangePasswordInput: ChangePasswordInput;
   Companies: ResolverTypeWrapper<Companies>;
   CompanyInput: CompanyInput;
@@ -692,6 +707,7 @@ export type ResolversParentTypes = {
   BrandInput: BrandInput;
   BrandResponse: BrandResponse;
   Category: Category;
+  CategoryInput: CategoryInput;
   ChangePasswordInput: ChangePasswordInput;
   Companies: Companies;
   CompanyInput: CompanyInput;
@@ -777,8 +793,21 @@ export type CategoryResolvers<
     ResolversParentTypes["Category"] = ResolversParentTypes["Category"],
 > = {
   _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  badge?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  borderColor?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   categoryName?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  color?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  icon?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  iconColor?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   totalProducts?: Resolver<
     Maybe<ResolversTypes["Int"]>,
     ParentType,
@@ -887,7 +916,7 @@ export type MutationResolvers<
     ResolversTypes["Category"],
     ParentType,
     ContextType,
-    RequireFields<MutationCreateCategoryArgs, "categoryName">
+    RequireFields<MutationCreateCategoryArgs, "input">
   >;
   createCompany?: Resolver<
     ResolversTypes["CompanyResponse"],
