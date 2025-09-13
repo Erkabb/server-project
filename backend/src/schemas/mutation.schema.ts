@@ -16,6 +16,7 @@ export const MutationAndQueriesTypeDefs = gql`
     uploadVideo(input: VideoUploadInput!): VideoUploadResponse!
     addUser(input: AddUserInput!): User!
     createJobAd(input: CreateJobAdInput!): JobAdResponse!
+    createOrderRequest(input: OrderRequestInput!): RequestResponse!
   }
   type Query {
     getUserById(_id: ID!): User!
@@ -33,5 +34,6 @@ export const MutationAndQueriesTypeDefs = gql`
     getVideoById(_id: ID!): VideoUpload!
     getJobAds: [JobAd!]!
     getJobAdById(_id: ID!): JobAd
+    getRequests: [Request!]!
   }
 `;

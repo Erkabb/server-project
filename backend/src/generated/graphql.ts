@@ -129,9 +129,22 @@ export type CompanyInput = {
   registerNumber: Scalars["String"]["input"];
 };
 
+export type CompanyInputType = {
+  email?: InputMaybe<Scalars["String"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  phoneNumber?: InputMaybe<Scalars["String"]["input"]>;
+};
+
 export type CompanyResponse = {
   __typename?: "CompanyResponse";
   message: Scalars["String"]["output"];
+};
+
+export type CompanyType = {
+  __typename?: "CompanyType";
+  email?: Maybe<Scalars["String"]["output"]>;
+  name?: Maybe<Scalars["String"]["output"]>;
+  phoneNumber?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type CreateJobAdInput = {
@@ -175,6 +188,7 @@ export type Mutation = {
   createCompany: CompanyResponse;
   createJobAd: JobAdResponse;
   createOrder: OrderResponse;
+  createOrderRequest: RequestResponse;
   createProduct: ProductResponse;
   createStore: StoreResponse;
   getUploadSignature: Signature;
@@ -210,6 +224,10 @@ export type MutationCreateJobAdArgs = {
 
 export type MutationCreateOrderArgs = {
   input: OrderInput;
+};
+
+export type MutationCreateOrderRequestArgs = {
+  input: OrderRequestInput;
 };
 
 export type MutationCreateProductArgs = {
@@ -294,6 +312,17 @@ export type OrderInput = {
   userAddress: Scalars["String"]["input"];
 };
 
+export type OrderRequestInput = {
+  budget: Scalars["String"]["input"];
+  company?: InputMaybe<CompanyInputType>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  features: Array<Scalars["String"]["input"]>;
+  projectType: Scalars["String"]["input"];
+  timeline?: InputMaybe<Scalars["String"]["input"]>;
+  user?: InputMaybe<UserInputType>;
+  website?: InputMaybe<Scalars["String"]["input"]>;
+};
+
 export type OrderResponse = {
   __typename?: "OrderResponse";
   message: Scalars["String"]["output"];
@@ -364,6 +393,7 @@ export type Query = {
   getOrders: Array<Order>;
   getProduct: Array<Product>;
   getProductById: Product;
+  getRequests: Array<Request>;
   getShop: Array<Companies>;
   getShopById: Companies;
   getSignature: Signature;
@@ -404,6 +434,23 @@ export type QueryGetVideoByIdArgs = {
 export type RecoverPasswordInput = {
   password: Scalars["String"]["input"];
   resetToken: Scalars["String"]["input"];
+};
+
+export type Request = {
+  __typename?: "Request";
+  budget: Scalars["String"]["output"];
+  company?: Maybe<CompanyType>;
+  description?: Maybe<Scalars["String"]["output"]>;
+  features: Array<Scalars["String"]["output"]>;
+  projectType: Scalars["String"]["output"];
+  timeline?: Maybe<Scalars["String"]["output"]>;
+  user?: Maybe<UserType>;
+  website?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type RequestResponse = {
+  __typename?: "RequestResponse";
+  message: Scalars["String"]["output"];
 };
 
 export type Response = {
@@ -497,6 +544,21 @@ export type User = {
   status?: Maybe<Scalars["String"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
   userLevel?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type UserInputType = {
+  email?: InputMaybe<Scalars["String"]["input"]>;
+  firstname?: InputMaybe<Scalars["String"]["input"]>;
+  lastname?: InputMaybe<Scalars["String"]["input"]>;
+  phone?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type UserType = {
+  __typename?: "UserType";
+  email?: Maybe<Scalars["String"]["output"]>;
+  firstname?: Maybe<Scalars["String"]["output"]>;
+  lastname?: Maybe<Scalars["String"]["output"]>;
+  phone?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type VideoUpload = {
@@ -660,7 +722,9 @@ export type ResolversTypes = {
   ChangePasswordInput: ChangePasswordInput;
   Companies: ResolverTypeWrapper<Companies>;
   CompanyInput: CompanyInput;
+  CompanyInputType: CompanyInputType;
   CompanyResponse: ResolverTypeWrapper<CompanyResponse>;
+  CompanyType: ResolverTypeWrapper<CompanyType>;
   CreateJobAdInput: CreateJobAdInput;
   Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
   Float: ResolverTypeWrapper<Scalars["Float"]["output"]>;
@@ -674,6 +738,7 @@ export type ResolversTypes = {
   OptionTypes: ResolverTypeWrapper<OptionTypes>;
   Order: ResolverTypeWrapper<Order>;
   OrderInput: OrderInput;
+  OrderRequestInput: OrderRequestInput;
   OrderResponse: ResolverTypeWrapper<OrderResponse>;
   Product: ResolverTypeWrapper<Product>;
   ProductInput: ProductInput;
@@ -682,6 +747,8 @@ export type ResolversTypes = {
   PropertyInput: PropertyInput;
   Query: ResolverTypeWrapper<{}>;
   RecoverPasswordInput: RecoverPasswordInput;
+  Request: ResolverTypeWrapper<Request>;
+  RequestResponse: ResolverTypeWrapper<RequestResponse>;
   Response: ResolverTypeWrapper<Response>;
   SignUpInput: SignUpInput;
   Signature: ResolverTypeWrapper<Signature>;
@@ -693,6 +760,8 @@ export type ResolversTypes = {
   SubProperties: ResolverTypeWrapper<SubProperties>;
   SubPropertyInput: SubPropertyInput;
   User: ResolverTypeWrapper<User>;
+  UserInputType: UserInputType;
+  UserType: ResolverTypeWrapper<UserType>;
   VideoUpload: ResolverTypeWrapper<VideoUpload>;
   VideoUploadInput: VideoUploadInput;
   VideoUploadResponse: ResolverTypeWrapper<VideoUploadResponse>;
@@ -713,7 +782,9 @@ export type ResolversParentTypes = {
   ChangePasswordInput: ChangePasswordInput;
   Companies: Companies;
   CompanyInput: CompanyInput;
+  CompanyInputType: CompanyInputType;
   CompanyResponse: CompanyResponse;
+  CompanyType: CompanyType;
   CreateJobAdInput: CreateJobAdInput;
   Date: Scalars["Date"]["output"];
   Float: Scalars["Float"]["output"];
@@ -727,6 +798,7 @@ export type ResolversParentTypes = {
   OptionTypes: OptionTypes;
   Order: Order;
   OrderInput: OrderInput;
+  OrderRequestInput: OrderRequestInput;
   OrderResponse: OrderResponse;
   Product: Product;
   ProductInput: ProductInput;
@@ -735,6 +807,8 @@ export type ResolversParentTypes = {
   PropertyInput: PropertyInput;
   Query: {};
   RecoverPasswordInput: RecoverPasswordInput;
+  Request: Request;
+  RequestResponse: RequestResponse;
   Response: Response;
   SignUpInput: SignUpInput;
   Signature: Signature;
@@ -746,6 +820,8 @@ export type ResolversParentTypes = {
   SubProperties: SubProperties;
   SubPropertyInput: SubPropertyInput;
   User: User;
+  UserInputType: UserInputType;
+  UserType: UserType;
   VideoUpload: VideoUpload;
   VideoUploadInput: VideoUploadInput;
   VideoUploadResponse: VideoUploadResponse;
@@ -864,6 +940,21 @@ export type CompanyResponseResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CompanyTypeResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["CompanyType"] = ResolversParentTypes["CompanyType"],
+> = {
+  email?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  phoneNumber?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface DateScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes["Date"], any> {
   name: "Date";
@@ -942,6 +1033,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateOrderArgs, "input">
+  >;
+  createOrderRequest?: Resolver<
+    ResolversTypes["RequestResponse"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateOrderRequestArgs, "input">
   >;
   createProduct?: Resolver<
     ResolversTypes["ProductResponse"],
@@ -1192,6 +1289,11 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryGetProductByIdArgs, "_id">
   >;
+  getRequests?: Resolver<
+    Array<ResolversTypes["Request"]>,
+    ParentType,
+    ContextType
+  >;
   getShop?: Resolver<
     Array<ResolversTypes["Companies"]>,
     ParentType,
@@ -1222,6 +1324,39 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+};
+
+export type RequestResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["Request"] = ResolversParentTypes["Request"],
+> = {
+  budget?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  company?: Resolver<
+    Maybe<ResolversTypes["CompanyType"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  features?: Resolver<Array<ResolversTypes["String"]>, ParentType, ContextType>;
+  projectType?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  timeline?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes["UserType"]>, ParentType, ContextType>;
+  website?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RequestResponseResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["RequestResponse"] = ResolversParentTypes["RequestResponse"],
+> = {
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ResponseResolvers<
@@ -1377,6 +1512,22 @@ export type UserResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type UserTypeResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["UserType"] = ResolversParentTypes["UserType"],
+> = {
+  email?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  firstname?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  lastname?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  phone?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type VideoUploadResolvers<
   ContextType = Context,
   ParentType extends
@@ -1443,6 +1594,7 @@ export type Resolvers<ContextType = Context> = {
   Category?: CategoryResolvers<ContextType>;
   Companies?: CompaniesResolvers<ContextType>;
   CompanyResponse?: CompanyResponseResolvers<ContextType>;
+  CompanyType?: CompanyTypeResolvers<ContextType>;
   Date?: GraphQLScalarType;
   JobAd?: JobAdResolvers<ContextType>;
   JobAdResponse?: JobAdResponseResolvers<ContextType>;
@@ -1454,12 +1606,15 @@ export type Resolvers<ContextType = Context> = {
   ProductResponse?: ProductResponseResolvers<ContextType>;
   Properties?: PropertiesResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Request?: RequestResolvers<ContextType>;
+  RequestResponse?: RequestResponseResolvers<ContextType>;
   Response?: ResponseResolvers<ContextType>;
   Signature?: SignatureResolvers<ContextType>;
   StoreResponse?: StoreResponseResolvers<ContextType>;
   Stores?: StoresResolvers<ContextType>;
   SubProperties?: SubPropertiesResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  UserType?: UserTypeResolvers<ContextType>;
   VideoUpload?: VideoUploadResolvers<ContextType>;
   VideoUploadResponse?: VideoUploadResponseResolvers<ContextType>;
   YoutubeUrlType?: YoutubeUrlTypeResolvers<ContextType>;
