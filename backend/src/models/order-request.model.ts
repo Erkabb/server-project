@@ -34,9 +34,18 @@ const orderRequestSchema = new Schema<OrderRequest>({
     type: String,
     required: true,
   },
-  timeline: String,
-  description: String,
-  website: String,
+  timeline: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  website: {
+    type: String,
+    default: "website",
+  },
   user: {
     firstName: String,
     lastName: String,

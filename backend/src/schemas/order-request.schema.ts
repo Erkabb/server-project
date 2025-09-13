@@ -5,8 +5,8 @@ export const requestTypeDefs = gql`
     projectType: String!
     features: [String!]!
     budget: String!
-    timeline: String
-    description: String
+    timeline: String!
+    description: String!
     website: String
     user: UserType
     company: CompanyType
@@ -42,8 +42,8 @@ export const requestTypeDefs = gql`
     projectType: String!
     features: [String!]!
     budget: String!
-    timeline: String
-    description: String
+    timeline: String!
+    description: String!
     website: String
     user: UserInputType
     company: CompanyInputType

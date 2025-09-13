@@ -315,10 +315,10 @@ export type OrderInput = {
 export type OrderRequestInput = {
   budget: Scalars["String"]["input"];
   company?: InputMaybe<CompanyInputType>;
-  description?: InputMaybe<Scalars["String"]["input"]>;
+  description: Scalars["String"]["input"];
   features: Array<Scalars["String"]["input"]>;
   projectType: Scalars["String"]["input"];
-  timeline?: InputMaybe<Scalars["String"]["input"]>;
+  timeline: Scalars["String"]["input"];
   user?: InputMaybe<UserInputType>;
   website?: InputMaybe<Scalars["String"]["input"]>;
 };
@@ -440,10 +440,10 @@ export type Request = {
   __typename?: "Request";
   budget: Scalars["String"]["output"];
   company?: Maybe<CompanyType>;
-  description?: Maybe<Scalars["String"]["output"]>;
+  description: Scalars["String"]["output"];
   features: Array<Scalars["String"]["output"]>;
   projectType: Scalars["String"]["output"];
-  timeline?: Maybe<Scalars["String"]["output"]>;
+  timeline: Scalars["String"]["output"];
   user?: Maybe<UserType>;
   website?: Maybe<Scalars["String"]["output"]>;
 };
@@ -1337,14 +1337,10 @@ export type RequestResolvers<
     ParentType,
     ContextType
   >;
-  description?: Resolver<
-    Maybe<ResolversTypes["String"]>,
-    ParentType,
-    ContextType
-  >;
+  description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   features?: Resolver<Array<ResolversTypes["String"]>, ParentType, ContextType>;
   projectType?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  timeline?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  timeline?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes["UserType"]>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
