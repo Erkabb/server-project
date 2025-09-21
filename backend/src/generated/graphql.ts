@@ -262,6 +262,7 @@ export type OptionTypeInput = {
   color?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   images?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   size?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  weight?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type OptionTypes = {
@@ -269,6 +270,7 @@ export type OptionTypes = {
   color?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   images?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   size?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+  weight?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Order = {
@@ -336,14 +338,17 @@ export type Product = {
   createdAt: Scalars["Date"]["output"];
   detail?: Maybe<Scalars["String"]["output"]>;
   discount?: Maybe<Scalars["Float"]["output"]>;
+  estimatedDelivery?: Maybe<Scalars["Date"]["output"]>;
   link?: Maybe<Scalars["String"]["output"]>;
   name: Scalars["String"]["output"];
   optionTypes?: Maybe<OptionTypes>;
   productProperties?: Maybe<Properties>;
   quantity?: Maybe<Scalars["Int"]["output"]>;
   soldQuantity?: Maybe<Scalars["Int"]["output"]>;
+  status?: Maybe<Scalars["String"]["output"]>;
   store?: Maybe<Array<Scalars["ID"]["output"]>>;
   totalQuantity?: Maybe<Scalars["Int"]["output"]>;
+  trackCode?: Maybe<Scalars["String"]["output"]>;
   unitPrice?: Maybe<Scalars["Float"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
 };
@@ -353,13 +358,16 @@ export type ProductInput = {
   category?: InputMaybe<Array<Scalars["ID"]["input"]>>;
   detail?: InputMaybe<Scalars["String"]["input"]>;
   discount?: InputMaybe<Scalars["Float"]["input"]>;
+  estimatedDelivery?: InputMaybe<Scalars["Date"]["input"]>;
   link?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
   optionTypes?: InputMaybe<OptionTypeInput>;
   productProperties?: InputMaybe<PropertyInput>;
   quantity?: InputMaybe<Scalars["Int"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
   store?: InputMaybe<Array<Scalars["ID"]["input"]>>;
   totalQuantity?: InputMaybe<Scalars["Int"]["input"]>;
+  trackCode?: InputMaybe<Scalars["String"]["input"]>;
   unitPrice?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
@@ -1104,6 +1112,7 @@ export type OptionTypesResolvers<
     ParentType,
     ContextType
   >;
+  weight?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1194,6 +1203,11 @@ export type ProductResolvers<
   createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
   detail?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   discount?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  estimatedDelivery?: Resolver<
+    Maybe<ResolversTypes["Date"]>,
+    ParentType,
+    ContextType
+  >;
   link?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   optionTypes?: Resolver<
@@ -1212,9 +1226,15 @@ export type ProductResolvers<
     ParentType,
     ContextType
   >;
+  status?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   store?: Resolver<Maybe<Array<ResolversTypes["ID"]>>, ParentType, ContextType>;
   totalQuantity?: Resolver<
     Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  trackCode?: Resolver<
+    Maybe<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
