@@ -401,6 +401,7 @@ export type Query = {
   getOrders: Array<Order>;
   getProduct: Array<Product>;
   getProductById: Product;
+  getProductByName: Product;
   getProductByTrackCode: Product;
   getRequests: Array<Request>;
   getShop: Array<Companies>;
@@ -426,6 +427,10 @@ export type QueryGetOrderByIdArgs = {
 
 export type QueryGetProductByIdArgs = {
   _id: Scalars["ID"]["input"];
+};
+
+export type QueryGetProductByNameArgs = {
+  name: Scalars["String"]["input"];
 };
 
 export type QueryGetProductByTrackCodeArgs = {
@@ -1313,6 +1318,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     RequireFields<QueryGetProductByIdArgs, "_id">
+  >;
+  getProductByName?: Resolver<
+    ResolversTypes["Product"],
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetProductByNameArgs, "name">
   >;
   getProductByTrackCode?: Resolver<
     ResolversTypes["Product"],
