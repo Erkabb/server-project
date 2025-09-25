@@ -35,7 +35,7 @@ export const MutationAndQueriesTypeDefs = gql`
     getJobAds: [JobAd!]!
     getJobAdById(_id: ID!): JobAd
     getRequests: [Request!]!
-    getProductByTrackCode(trackCode: String!): Product!
+    getProductByNameOrTrackCode(input: FindProductInput!): Product!
     getProductByName(name: String!): Product!
   }
 `;

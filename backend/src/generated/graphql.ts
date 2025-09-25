@@ -155,6 +155,11 @@ export type CreateJobAdInput = {
   title: Scalars["String"]["input"];
 };
 
+export type FindProductInput = {
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  trackCode?: InputMaybe<Scalars["String"]["input"]>;
+};
+
 export type JobAd = {
   __typename?: "JobAd";
   _id: Scalars["ID"]["output"];
@@ -402,7 +407,7 @@ export type Query = {
   getProduct: Array<Product>;
   getProductById: Product;
   getProductByName: Product;
-  getProductByTrackCode: Product;
+  getProductByNameOrTrackCode: Product;
   getRequests: Array<Request>;
   getShop: Array<Companies>;
   getShopById: Companies;
@@ -433,8 +438,8 @@ export type QueryGetProductByNameArgs = {
   name: Scalars["String"]["input"];
 };
 
-export type QueryGetProductByTrackCodeArgs = {
-  trackCode: Scalars["String"]["input"];
+export type QueryGetProductByNameOrTrackCodeArgs = {
+  input: FindProductInput;
 };
 
 export type QueryGetShopByIdArgs = {
@@ -745,6 +750,7 @@ export type ResolversTypes = {
   CompanyType: ResolverTypeWrapper<CompanyType>;
   CreateJobAdInput: CreateJobAdInput;
   Date: ResolverTypeWrapper<Scalars["Date"]["output"]>;
+  FindProductInput: FindProductInput;
   Float: ResolverTypeWrapper<Scalars["Float"]["output"]>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
@@ -805,6 +811,7 @@ export type ResolversParentTypes = {
   CompanyType: CompanyType;
   CreateJobAdInput: CreateJobAdInput;
   Date: Scalars["Date"]["output"];
+  FindProductInput: FindProductInput;
   Float: Scalars["Float"]["output"];
   ID: Scalars["ID"]["output"];
   Int: Scalars["Int"]["output"];
@@ -1325,11 +1332,11 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryGetProductByNameArgs, "name">
   >;
-  getProductByTrackCode?: Resolver<
+  getProductByNameOrTrackCode?: Resolver<
     ResolversTypes["Product"],
     ParentType,
     ContextType,
-    RequireFields<QueryGetProductByTrackCodeArgs, "trackCode">
+    RequireFields<QueryGetProductByNameOrTrackCodeArgs, "input">
   >;
   getRequests?: Resolver<
     Array<ResolversTypes["Request"]>,

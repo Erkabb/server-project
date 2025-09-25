@@ -76,6 +76,10 @@ export const typeDefs = gql`
     productProperties: PropertyInput
     link: String
   }
+  input FindProductInput {
+    name: String
+    trackCode: String
+  }
   type ProductResponse {
     message: String!
   }
