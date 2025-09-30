@@ -3,7 +3,7 @@ import {
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
 } from "graphql";
-import { Context } from "@/types";
+import { Context } from "../types";
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -44,6 +44,7 @@ export type AddUserInput = {
   password: Scalars["String"]["input"];
   phoneNumber: Scalars["String"]["input"];
   userLevel?: InputMaybe<Scalars["String"]["input"]>;
+  website: Scalars["String"]["input"];
 };
 
 export type AuthResponse = {
@@ -56,14 +57,18 @@ export type Brand = {
   __typename?: "Brand";
   _id: Scalars["ID"]["output"];
   brandLogo: Scalars["String"]["output"];
+  createdAt: Scalars["Date"]["output"];
   name: Scalars["String"]["output"];
   subLogo?: Maybe<Scalars["String"]["output"]>;
   totalProducts?: Maybe<Scalars["Int"]["output"]>;
+  updatedAt: Scalars["Date"]["output"];
+  website: Scalars["String"]["output"];
 };
 
 export type BrandInput = {
   brandLogo?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
+  website: Scalars["String"]["input"];
 };
 
 export type BrandResponse = {
@@ -303,6 +308,7 @@ export type Order = {
   updatedAt: Scalars["Date"]["output"];
   userAddress: Scalars["String"]["output"];
   waitUntil?: Maybe<Scalars["Date"]["output"]>;
+  website: Scalars["String"]["output"];
 };
 
 export type OrderInput = {
@@ -317,6 +323,7 @@ export type OrderInput = {
   total: Scalars["Float"]["input"];
   unitPrice: Scalars["Float"]["input"];
   userAddress: Scalars["String"]["input"];
+  website: Scalars["String"]["input"];
 };
 
 export type OrderRequestInput = {
@@ -356,6 +363,7 @@ export type Product = {
   trackCode?: Maybe<Scalars["String"]["output"]>;
   unitPrice?: Maybe<Scalars["Float"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
+  website: Scalars["String"]["output"];
 };
 
 export type ProductInput = {
@@ -374,6 +382,7 @@ export type ProductInput = {
   totalQuantity?: InputMaybe<Scalars["Int"]["input"]>;
   trackCode?: InputMaybe<Scalars["String"]["input"]>;
   unitPrice?: InputMaybe<Scalars["Float"]["input"]>;
+  website: Scalars["String"]["input"];
 };
 
 export type ProductResponse = {
@@ -398,6 +407,7 @@ export type PropertyInput = {
 
 export type Query = {
   __typename?: "Query";
+  getBrands: Array<Brand>;
   getCategories: Array<Maybe<Category>>;
   getCategory: Array<Category>;
   getJobAdById?: Maybe<JobAd>;
@@ -486,6 +496,7 @@ export type SignUpInput = {
   firstname: Scalars["String"]["input"];
   lastname: Scalars["String"]["input"];
   password: Scalars["String"]["input"];
+  website: Scalars["String"]["input"];
 };
 
 export type Signature = {
@@ -567,6 +578,7 @@ export type User = {
   status?: Maybe<Scalars["String"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
   userLevel?: Maybe<Scalars["String"]["output"]>;
+  website: Scalars["String"]["output"];
 };
 
 export type UserInputType = {
@@ -871,6 +883,7 @@ export type BrandResolvers<
 > = {
   _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   brandLogo?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   subLogo?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   totalProducts?: Resolver<
@@ -878,6 +891,8 @@ export type BrandResolvers<
     ParentType,
     ContextType
   >;
+  updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  website?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1193,6 +1208,7 @@ export type OrderResolvers<
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
   userAddress?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   waitUntil?: Resolver<Maybe<ResolversTypes["Date"]>, ParentType, ContextType>;
+  website?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1257,6 +1273,7 @@ export type ProductResolvers<
   >;
   unitPrice?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  website?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1290,6 +1307,7 @@ export type QueryResolvers<
   ParentType extends
     ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
+  getBrands?: Resolver<Array<ResolversTypes["Brand"]>, ParentType, ContextType>;
   getCategories?: Resolver<
     Array<Maybe<ResolversTypes["Category"]>>,
     ParentType,
@@ -1554,6 +1572,7 @@ export type UserResolvers<
     ParentType,
     ContextType
   >;
+  website?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

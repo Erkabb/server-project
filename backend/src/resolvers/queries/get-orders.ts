@@ -8,7 +8,8 @@ export const getOrderById: QueryResolvers['getOrderById'] = async (_, {_id},  {u
     return order;
 }
 
-export const getOrders: QueryResolvers['getOrders'] = async (_, __, {userId}) => {
+export const getOrders: QueryResolvers['getOrders'] = async (_, __, {userId, website}) => {
     if(!userId) throw new Error('User must be logged in');
-    return Order.find();
+    if (!website) throw new Error('Website context is required');
+    return Order.find({ website }).sort({ createdAt: -1 });
 }

@@ -7,9 +7,11 @@ import Product from "@/models/product.model";
 export const createProduct: MutationResolvers["createProduct"] = async (
   _,
   { input },
-  { userId },
+  { userId, website },
 ) => {
   const { category, store, brand, quantity } = input;
+
+  if (!website) throw new Error('Website context is required');
 
   const user = await User.findById(userId);
   if (!user) {
@@ -45,6 +47,7 @@ export const createProduct: MutationResolvers["createProduct"] = async (
       link: input.link,
       status: input.status,
       estimatedDelivery: input.estimatedDelivery,
+      website: input.website,
       productProperties: input.productProperties
         ? {
             position: input.productProperties.position,

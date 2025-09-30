@@ -29,6 +29,7 @@ const server = new ApolloServer<Context>({
 const handler=startServerAndCreateNextHandler<NextRequest, Context>(server, {
   context: async (req) => {
     const token = req.headers.get('authorization') || '';
+    const website = req.headers.get('x-website') || req.headers.get('website') || null;
 
     let userId: null;
 
@@ -41,6 +42,7 @@ const handler=startServerAndCreateNextHandler<NextRequest, Context>(server, {
 
     return {
       userId,
+      website,
     };
   },
 });

@@ -37,5 +37,6 @@ export const MutationAndQueriesTypeDefs = gql`
     getRequests: [Request!]!
     getProductByNameOrTrackCode(input: FindProductInput!): Product!
     getProductByName(name: String!): Product!
+    getBrands: [Brand!]!
   }
 `;

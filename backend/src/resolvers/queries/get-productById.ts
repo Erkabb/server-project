@@ -6,7 +6,7 @@ export const getProductById:QueryResolvers['getProductById']=async(_, {_id})=>{
     return product;
 }
 
-export const getProduct:QueryResolvers['getProduct']=async()=>{
-    return Product.find();
-
+export const getProduct:QueryResolvers['getProduct']=async(_, __, { website })=>{
+    if (!website) throw new Error('Website context is required');
+    return Product.find({ website }).sort({ createdAt: -1 });
 }

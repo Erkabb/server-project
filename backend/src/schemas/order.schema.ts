@@ -23,8 +23,9 @@ export const typeDefs = gql`
     waitUntil: Date    
     createdAt: Date!
     updatedAt: Date!
-        availableHours: Float
-        pickedStaff: Float
+    availableHours: Float
+    pickedStaff: Float
+    website: String!
     }
     
     input OrderInput {
@@ -39,6 +40,7 @@ export const typeDefs = gql`
         phoneNumber: String!
         availableHours: Float
         pickedStaff: Float
+        website: String!
     }
     type OrderResponse {
     message: String!

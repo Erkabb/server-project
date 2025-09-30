@@ -28,6 +28,7 @@ type User = {
   companyPhoneNumber: string;
   address: string;
   userLevel: string;
+  website: string;
 };
 
 const userSchema = new Schema<User>(
@@ -122,6 +123,7 @@ const userSchema = new Schema<User>(
     info: { type: String, default: null },
     nickname: { type: String, default: null },
     address: { type: String, default: null },
+    website: { type: String, required: true },
   },
   {
     timestamps: true,

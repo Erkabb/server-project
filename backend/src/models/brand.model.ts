@@ -7,6 +7,7 @@ type Brand = {
     brandLogo: string,
     subLogo: string,
     totalProducts: number,
+    website: string,
 };
 
 const brandSchema = new Schema<Brand>({
@@ -15,6 +16,7 @@ const brandSchema = new Schema<Brand>({
     brandLogo: {type: String, required: true},
     subLogo: {type: String},
     totalProducts: {type: Number, default: 0},
+    website: {type: String, required: true},
 }, { timestamps: true });
 
 const Brand=models['Brand'] || model<Brand>('Brand', brandSchema);

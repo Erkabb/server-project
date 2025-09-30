@@ -1,9 +1,9 @@
 import {QueryResolvers} from "@/generated/graphql";
 import User from "@/models/auth.model";
 
-export const getUsers: QueryResolvers['getUsers']= async () => {
-    return User.find();
-
+export const getUsers: QueryResolvers['getUsers']= async (_, __, { website }) => {
+    if (!website) throw new Error('Website context is required');
+    return User.find({ website }).sort({ createdAt: -1 });
 };
 
 export const getUserById:QueryResolvers['getUserById']=async(_, __, {userId})=>{

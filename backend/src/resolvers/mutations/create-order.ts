@@ -3,9 +3,10 @@ import User from "@/models/auth.model";
 import Product from "@/models/product.model";
 import Order from "@/models/order.model";
 
-export const createOrder: MutationResolvers['createOrder'] = async(_,  {input}, { userId }) => {
+export const createOrder: MutationResolvers['createOrder'] = async(_,  {input}, { userId, website }) => {
     // Check if user is authenticated
     if (!userId) throw new Error('Must be logged in');
+    if (!website) throw new Error('Website context is required');
 
     const user = await User.findById(userId);
     if (!user) throw new Error('User not found');
@@ -42,6 +43,7 @@ export const createOrder: MutationResolvers['createOrder'] = async(_,  {input}, 
         phoneNumber,
         availableHours,
         pickedStaff,
+        website: input.website,
         isCompany: user.isCompany,
         companyName: user.isCompany ? user.companyName : null,
         companyRegister: user.isCompany ? user.companyRegister : null,

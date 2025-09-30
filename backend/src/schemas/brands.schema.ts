@@ -8,6 +8,15 @@ export const brandTypeDef = gql`
         brandLogo: String!
         subLogo: String
         totalProducts: Int
+        website: String!
+        createdAt: Date!
+        updatedAt: Date!
+    }
+    
+    input BrandInput {
+        name: String
+        brandLogo: String
+        website: String!
     }
     
     type BrandResponse {

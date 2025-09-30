@@ -32,6 +32,7 @@ type Product = {
   quantity: number;
   link: string;
   status: string;
+  website: string;
 };
 
 const productSchema = new Schema<Product>(
@@ -124,6 +125,7 @@ const productSchema = new Schema<Product>(
       required: true,
     },
     link: String,
+    website: { type: String, required: true },
   },
   {
     timestamps: true,

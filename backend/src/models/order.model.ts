@@ -22,6 +22,7 @@ type Order = {
     waitUntil: Date;
     availableHours: number;
     pickedStaff: string;
+    website: string;
 };
 
 // userAddress: string,
@@ -115,6 +116,7 @@ const orderSchema = new Schema<Order>({
     completedAt: {type: Date, default: null},
     availableHours: {type: Number, default: null},
     pickedStaff: {type: String, default: null},
+    website: { type: String, required: true },
 }, {
     timestamps: true
 });
