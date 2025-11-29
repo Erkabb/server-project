@@ -32,6 +32,7 @@ type Product = {
   quantity: number;
   link: string;
   status: string;
+  websiteId: string;
 };
 
 const productSchema = new Schema<Product>(
@@ -84,6 +85,11 @@ const productSchema = new Schema<Product>(
         ref: "Brand",
       },
     ],
+    websiteId: {
+      type: String,
+      ref: "Website",
+      required: true,
+    },
     productProperties: {
       _id: Schema.Types.ObjectId,
       position: String,

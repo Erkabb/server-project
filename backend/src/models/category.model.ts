@@ -10,11 +10,17 @@ type Category = {
   icon: string;
   iconColor: string;
   description: string;
+  websiteId: string;
 };
 const categorySchema = new Schema<Category>(
   {
     categoryName: {
       type: String,
+      required: true,
+    },
+    websiteId: {
+      type: String,
+      ref: "Website",
       required: true,
     },
     totalProducts: {

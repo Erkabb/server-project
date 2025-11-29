@@ -27,6 +27,7 @@ export const typeDefs = gql`
     createdAt: Date!
     updatedAt: Date!
     userLevel: String
+    websiteId: String!
   }
   type AuthResponse {
     user: User!
@@ -35,6 +36,7 @@ export const typeDefs = gql`
   input LoginInput {
     email: String!
     password: String!
+    websiteId: String!
   }
   input ChangePasswordInput {
     password: String!
@@ -49,6 +51,7 @@ export const typeDefs = gql`
     lastname: String!
     email: String!
     password: String!
+    websiteId: String!
   }
   input AddUserInput {
     email: String!
@@ -57,6 +60,7 @@ export const typeDefs = gql`
     phoneNumber: String!
     password: String!
     userLevel: String
+    websiteId: String!
   }
   type Response {
     message: String!

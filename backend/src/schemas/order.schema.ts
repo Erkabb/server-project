@@ -1,9 +1,9 @@
 import gql from "graphql-tag";
 
 export const typeDefs = gql`
-    type Order{
-    _id:ID!
-    productId:ID!
+  type Order {
+    _id: ID!
+    productId: ID!
     quantity: Int!
     total: Float!
     unitPrice: Float!
@@ -20,27 +20,29 @@ export const typeDefs = gql`
     declinedAt: Date
     cancelReason: String
     completedAt: Date
-    waitUntil: Date    
+    waitUntil: Date
+    websiteId: String!
     createdAt: Date!
     updatedAt: Date!
-        availableHours: Float
-        pickedStaff: Float
-    }
-    
-    input OrderInput {
-        productId:ID!
-        quantity: Int!
-        total: Float!
-        unitPrice: Float!
-        discount: Float!
-        leftQuantity: Int!
-        userAddress: String!
-        pickUpLocation: String!
-        phoneNumber: String!
-        availableHours: Float
-        pickedStaff: Float
-    }
-    type OrderResponse {
+    availableHours: Float
+    pickedStaff: Float
+  }
+
+  input OrderInput {
+    productId: ID!
+    quantity: Int!
+    total: Float!
+    unitPrice: Float!
+    discount: Float!
+    leftQuantity: Int!
+    userAddress: String!
+    pickUpLocation: String!
+    phoneNumber: String!
+    availableHours: Float
+    pickedStaff: Float
+    websiteId: String!
+  }
+  type OrderResponse {
     message: String!
-    }
-`
+  }
+`;

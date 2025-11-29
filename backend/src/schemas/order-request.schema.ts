@@ -10,6 +10,7 @@ export const requestTypeDefs = gql`
     website: String
     user: UserType
     company: CompanyType
+    websiteId: String!
   }
 
   type UserType {
@@ -47,6 +48,7 @@ export const requestTypeDefs = gql`
     website: String
     user: UserInputType
     company: CompanyInputType
+    websiteId: String!
   }
   type RequestResponse {
     message: String!

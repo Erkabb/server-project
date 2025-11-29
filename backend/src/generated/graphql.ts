@@ -44,6 +44,7 @@ export type AddUserInput = {
   password: Scalars["String"]["input"];
   phoneNumber: Scalars["String"]["input"];
   userLevel?: InputMaybe<Scalars["String"]["input"]>;
+  websiteId: Scalars["String"]["input"];
 };
 
 export type AuthResponse = {
@@ -59,6 +60,7 @@ export type Brand = {
   name: Scalars["String"]["output"];
   subLogo?: Maybe<Scalars["String"]["output"]>;
   totalProducts?: Maybe<Scalars["Int"]["output"]>;
+  websiteId: Scalars["String"]["output"];
 };
 
 export type BrandInput = {
@@ -84,6 +86,7 @@ export type Category = {
   iconColor?: Maybe<Scalars["String"]["output"]>;
   totalProducts?: Maybe<Scalars["Int"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
+  websiteId: Scalars["String"]["output"];
 };
 
 export type CategoryInput = {
@@ -94,6 +97,7 @@ export type CategoryInput = {
   description?: InputMaybe<Scalars["String"]["input"]>;
   icon?: InputMaybe<Scalars["String"]["input"]>;
   iconColor?: InputMaybe<Scalars["String"]["input"]>;
+  websiteId: Scalars["String"]["input"];
 };
 
 export type ChangePasswordInput = {
@@ -118,6 +122,7 @@ export type Companies = {
   timesheet?: Maybe<Scalars["String"]["output"]>;
   totalProducts: Scalars["Int"]["output"];
   updatedAt: Scalars["Date"]["output"];
+  websiteId: Scalars["String"]["output"];
 };
 
 export type CompanyInput = {
@@ -127,6 +132,7 @@ export type CompanyInput = {
   officialName: Scalars["String"]["input"];
   phoneNumber: Scalars["String"]["input"];
   registerNumber: Scalars["String"]["input"];
+  websiteId: Scalars["String"]["input"];
 };
 
 export type CompanyInputType = {
@@ -153,6 +159,7 @@ export type CreateJobAdInput = {
   location: Scalars["String"]["input"];
   salary?: InputMaybe<Scalars["Float"]["input"]>;
   title: Scalars["String"]["input"];
+  websiteId: Scalars["String"]["input"];
 };
 
 export type FindProductInput = {
@@ -171,6 +178,7 @@ export type JobAd = {
   salary?: Maybe<Scalars["Float"]["output"]>;
   title: Scalars["String"]["output"];
   updatedAt: Scalars["Date"]["output"];
+  websiteId: Scalars["String"]["output"];
 };
 
 export type JobAdResponse = {
@@ -182,6 +190,7 @@ export type JobAdResponse = {
 export type LoginInput = {
   email: Scalars["String"]["input"];
   password: Scalars["String"]["input"];
+  websiteId: Scalars["String"]["input"];
 };
 
 export type Mutation = {
@@ -196,6 +205,7 @@ export type Mutation = {
   createOrderRequest: RequestResponse;
   createProduct: ProductResponse;
   createStore: StoreResponse;
+  createWebsite: WebsiteResponse;
   getUploadSignature: Signature;
   login: AuthResponse;
   recoverPassword: Response;
@@ -241,6 +251,10 @@ export type MutationCreateProductArgs = {
 
 export type MutationCreateStoreArgs = {
   input: StoreInput;
+};
+
+export type MutationCreateWebsiteArgs = {
+  input: WebsiteInput;
 };
 
 export type MutationGetUploadSignatureArgs = {
@@ -303,6 +317,7 @@ export type Order = {
   updatedAt: Scalars["Date"]["output"];
   userAddress: Scalars["String"]["output"];
   waitUntil?: Maybe<Scalars["Date"]["output"]>;
+  websiteId: Scalars["String"]["output"];
 };
 
 export type OrderInput = {
@@ -317,6 +332,7 @@ export type OrderInput = {
   total: Scalars["Float"]["input"];
   unitPrice: Scalars["Float"]["input"];
   userAddress: Scalars["String"]["input"];
+  websiteId: Scalars["String"]["input"];
 };
 
 export type OrderRequestInput = {
@@ -328,6 +344,7 @@ export type OrderRequestInput = {
   timeline: Scalars["String"]["input"];
   user?: InputMaybe<UserInputType>;
   website?: InputMaybe<Scalars["String"]["input"]>;
+  websiteId: Scalars["String"]["input"];
 };
 
 export type OrderResponse = {
@@ -356,6 +373,7 @@ export type Product = {
   trackCode?: Maybe<Scalars["String"]["output"]>;
   unitPrice?: Maybe<Scalars["Float"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
+  websiteId: Scalars["String"]["output"];
 };
 
 export type ProductInput = {
@@ -374,6 +392,7 @@ export type ProductInput = {
   totalQuantity?: InputMaybe<Scalars["Int"]["input"]>;
   trackCode?: InputMaybe<Scalars["String"]["input"]>;
   unitPrice?: InputMaybe<Scalars["Float"]["input"]>;
+  websiteId: Scalars["String"]["input"];
 };
 
 export type ProductResponse = {
@@ -416,6 +435,7 @@ export type Query = {
   getUsers: Array<User>;
   getVideoById: VideoUpload;
   getVideos: Array<VideoUpload>;
+  getWebsiteById: Website;
 };
 
 export type QueryGetCategoryArgs = {
@@ -454,6 +474,10 @@ export type QueryGetVideoByIdArgs = {
   _id: Scalars["ID"]["input"];
 };
 
+export type QueryGetWebsiteByIdArgs = {
+  _id: Scalars["ID"]["input"];
+};
+
 export type RecoverPasswordInput = {
   password: Scalars["String"]["input"];
   resetToken: Scalars["String"]["input"];
@@ -469,6 +493,7 @@ export type Request = {
   timeline: Scalars["String"]["output"];
   user?: Maybe<UserType>;
   website?: Maybe<Scalars["String"]["output"]>;
+  websiteId: Scalars["String"]["output"];
 };
 
 export type RequestResponse = {
@@ -486,6 +511,7 @@ export type SignUpInput = {
   firstname: Scalars["String"]["input"];
   lastname: Scalars["String"]["input"];
   password: Scalars["String"]["input"];
+  websiteId: Scalars["String"]["input"];
 };
 
 export type Signature = {
@@ -496,10 +522,12 @@ export type Signature = {
   folder: Scalars["String"]["output"];
   signature: Scalars["String"]["output"];
   timestamp: Scalars["Float"]["output"];
+  websiteId: Scalars["String"]["output"];
 };
 
 export type SignatureInput = {
   folder: Scalars["String"]["input"];
+  websiteId: Scalars["String"]["input"];
 };
 
 export type StoreInput = {
@@ -508,6 +536,7 @@ export type StoreInput = {
   short_name?: InputMaybe<Scalars["String"]["input"]>;
   storeLocation?: InputMaybe<Scalars["String"]["input"]>;
   timesheets?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  websiteId: Scalars["String"]["input"];
 };
 
 export type StoreResponse = {
@@ -526,6 +555,7 @@ export type Stores = {
   storeLocation?: Maybe<Scalars["String"]["output"]>;
   timesheets?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
   totalProducts: Scalars["Int"]["output"];
+  websiteId: Scalars["String"]["output"];
 };
 
 export type SubProperties = {
@@ -567,6 +597,7 @@ export type User = {
   status?: Maybe<Scalars["String"]["output"]>;
   updatedAt: Scalars["Date"]["output"];
   userLevel?: Maybe<Scalars["String"]["output"]>;
+  websiteId: Scalars["String"]["output"];
 };
 
 export type UserInputType = {
@@ -594,6 +625,7 @@ export type VideoUpload = {
   thumbnail?: Maybe<Scalars["String"]["output"]>;
   title: Scalars["String"]["output"];
   unitPrice?: Maybe<Scalars["Float"]["output"]>;
+  websiteId: Scalars["String"]["output"];
   youtubeUrl: YoutubeUrlType;
 };
 
@@ -605,6 +637,7 @@ export type VideoUploadInput = {
   thumbnail?: InputMaybe<Scalars["String"]["input"]>;
   title: Scalars["String"]["input"];
   unitPrice?: InputMaybe<Scalars["Float"]["input"]>;
+  websiteId: Scalars["String"]["input"];
   youtubeUrl: YoutubeUrlInput;
 };
 
@@ -613,6 +646,45 @@ export type VideoUploadResponse = {
   message: Scalars["String"]["output"];
   success: Scalars["Boolean"]["output"];
   video?: Maybe<VideoUpload>;
+};
+
+export type Website = {
+  __typename?: "Website";
+  _id: Scalars["ID"]["output"];
+  address?: Maybe<Scalars["String"]["output"]>;
+  createdAt: Scalars["Date"]["output"];
+  domain?: Maybe<Scalars["String"]["output"]>;
+  index?: Maybe<Scalars["String"]["output"]>;
+  logo?: Maybe<Scalars["String"]["output"]>;
+  name: Scalars["String"]["output"];
+  phone?: Maybe<Scalars["String"]["output"]>;
+  short_name?: Maybe<Scalars["String"]["output"]>;
+  storeLocation?: Maybe<Scalars["String"]["output"]>;
+  subDomain?: Maybe<Scalars["String"]["output"]>;
+  subLogo?: Maybe<Scalars["String"]["output"]>;
+  timesheets?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+  token?: Maybe<Scalars["String"]["output"]>;
+  totalProducts?: Maybe<Scalars["Int"]["output"]>;
+  totalUsers?: Maybe<Scalars["Int"]["output"]>;
+  updatedAt: Scalars["Date"]["output"];
+};
+
+export type WebsiteInput = {
+  address?: InputMaybe<Scalars["String"]["input"]>;
+  domain?: InputMaybe<Scalars["String"]["input"]>;
+  index?: InputMaybe<Scalars["String"]["input"]>;
+  logo?: InputMaybe<Scalars["String"]["input"]>;
+  name: Scalars["String"]["input"];
+  phone?: InputMaybe<Scalars["String"]["input"]>;
+  short_name?: InputMaybe<Scalars["String"]["input"]>;
+  storeLocation?: InputMaybe<Scalars["String"]["input"]>;
+  timesheets?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+};
+
+export type WebsiteResponse = {
+  __typename?: "WebsiteResponse";
+  message: Scalars["String"]["output"];
+  token: Scalars["String"]["output"];
 };
 
 export type YoutubeUrlInput = {
@@ -789,6 +861,9 @@ export type ResolversTypes = {
   VideoUpload: ResolverTypeWrapper<VideoUpload>;
   VideoUploadInput: VideoUploadInput;
   VideoUploadResponse: ResolverTypeWrapper<VideoUploadResponse>;
+  Website: ResolverTypeWrapper<Website>;
+  WebsiteInput: WebsiteInput;
+  WebsiteResponse: ResolverTypeWrapper<WebsiteResponse>;
   YoutubeUrlInput: YoutubeUrlInput;
   YoutubeUrlType: ResolverTypeWrapper<YoutubeUrlType>;
 };
@@ -850,6 +925,9 @@ export type ResolversParentTypes = {
   VideoUpload: VideoUpload;
   VideoUploadInput: VideoUploadInput;
   VideoUploadResponse: VideoUploadResponse;
+  Website: Website;
+  WebsiteInput: WebsiteInput;
+  WebsiteResponse: WebsiteResponse;
   YoutubeUrlInput: YoutubeUrlInput;
   YoutubeUrlType: YoutubeUrlType;
 };
@@ -878,6 +956,7 @@ export type BrandResolvers<
     ParentType,
     ContextType
   >;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -922,6 +1001,7 @@ export type CategoryResolvers<
     ContextType
   >;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -953,6 +1033,7 @@ export type CompaniesResolvers<
   >;
   totalProducts?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -999,6 +1080,7 @@ export type JobAdResolvers<
   salary?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1076,6 +1158,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationCreateStoreArgs, "input">
+  >;
+  createWebsite?: Resolver<
+    ResolversTypes["WebsiteResponse"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationCreateWebsiteArgs, "input">
   >;
   getUploadSignature?: Resolver<
     ResolversTypes["Signature"],
@@ -1193,6 +1281,7 @@ export type OrderResolvers<
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
   userAddress?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   waitUntil?: Resolver<Maybe<ResolversTypes["Date"]>, ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1257,6 +1346,7 @@ export type ProductResolvers<
   >;
   unitPrice?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1373,6 +1463,12 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+  getWebsiteById?: Resolver<
+    ResolversTypes["Website"],
+    ParentType,
+    ContextType,
+    RequireFields<QueryGetWebsiteByIdArgs, "_id">
+  >;
 };
 
 export type RequestResolvers<
@@ -1392,6 +1488,7 @@ export type RequestResolvers<
   timeline?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes["UserType"]>, ParentType, ContextType>;
   website?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1424,6 +1521,7 @@ export type SignatureResolvers<
   folder?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   signature?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1462,6 +1560,7 @@ export type StoresResolvers<
     ContextType
   >;
   totalProducts?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1554,6 +1653,7 @@ export type UserResolvers<
     ParentType,
     ContextType
   >;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1598,6 +1698,7 @@ export type VideoUploadResolvers<
   >;
   title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   unitPrice?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  websiteId?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   youtubeUrl?: Resolver<
     ResolversTypes["YoutubeUrlType"],
     ParentType,
@@ -1618,6 +1719,61 @@ export type VideoUploadResponseResolvers<
     ParentType,
     ContextType
   >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type WebsiteResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["Website"] = ResolversParentTypes["Website"],
+> = {
+  _id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  address?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  domain?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  index?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  phone?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  short_name?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  storeLocation?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  subDomain?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  subLogo?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  timesheets?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["String"]>>>,
+    ParentType,
+    ContextType
+  >;
+  token?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  totalProducts?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  totalUsers?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes["Date"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type WebsiteResponseResolvers<
+  ContextType = Context,
+  ParentType extends
+    ResolversParentTypes["WebsiteResponse"] = ResolversParentTypes["WebsiteResponse"],
+> = {
+  message?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  token?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1662,5 +1818,7 @@ export type Resolvers<ContextType = Context> = {
   UserType?: UserTypeResolvers<ContextType>;
   VideoUpload?: VideoUploadResolvers<ContextType>;
   VideoUploadResponse?: VideoUploadResponseResolvers<ContextType>;
+  Website?: WebsiteResolvers<ContextType>;
+  WebsiteResponse?: WebsiteResponseResolvers<ContextType>;
   YoutubeUrlType?: YoutubeUrlTypeResolvers<ContextType>;
 };

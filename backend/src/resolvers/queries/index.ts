@@ -6,3 +6,4 @@ export * from "./get-requests";
 export * from "./get-product-by-trackCode";
 // export * from './get-job-ad';
 export * from "./get-product-by-name";
+export * from "./get-website";

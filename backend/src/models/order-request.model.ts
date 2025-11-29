@@ -19,6 +19,7 @@ type OrderRequest = {
     email: string;
     phoneNumber: string;
   };
+  websiteId: string;
 };
 
 const orderRequestSchema = new Schema<OrderRequest>({
@@ -56,6 +57,11 @@ const orderRequestSchema = new Schema<OrderRequest>({
     name: String,
     email: String,
     phoneNumber: String,
+  },
+  websiteId: {
+    type: String,
+    ref: "Website",
+    required: true,
   },
 });
 

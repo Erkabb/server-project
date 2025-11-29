@@ -29,6 +29,7 @@ type VideoUpload = {
   unitPrice: number;
   category: string;
   level: string;
+  websiteId: string;
 };
 
 const videoUploadSchema = new Schema<VideoUpload>(
@@ -47,9 +48,14 @@ const videoUploadSchema = new Schema<VideoUpload>(
     unitPrice: {
       type: Number,
     },
+    websiteId: {
+      type: String,
+      ref: "Website",
+      required: true,
+    },
     category: String,
     level: {
-        type: String,
+      type: String,
       enum: ["beginner", "advanced", "proficient"],
     },
   },

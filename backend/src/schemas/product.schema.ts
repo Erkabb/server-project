@@ -21,6 +21,7 @@ export const typeDefs = gql`
     store: [ID!]
     quantity: Int
     link: String
+    websiteId: String!
   }
   type OptionTypes {
     size: [String]
@@ -75,6 +76,7 @@ export const typeDefs = gql`
     estimatedDelivery: Date
     productProperties: PropertyInput
     link: String
+    websiteId: String!
   }
   input FindProductInput {
     name: String

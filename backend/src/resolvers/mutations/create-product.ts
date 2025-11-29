@@ -7,11 +7,9 @@ import Product from "@/models/product.model";
 export const createProduct: MutationResolvers["createProduct"] = async (
   _,
   { input },
-  { userId },
+  { userId, websiteId },
 ) => {
-  const { category, store, brand, quantity } = input;
-
-  const user = await User.findById(userId);
+  const user = await User.findOne({ _id: userId, websiteId });
   if (!user) {
     return {
       message: "Must be logged in",
@@ -20,64 +18,49 @@ export const createProduct: MutationResolvers["createProduct"] = async (
     };
   }
 
-  try {
-    const categoryFind = await Category.findById(category);
-    const findStore = await Stores.findById(store);
-    const findBrand = await Brand.findById(brand);
+  const categoryFind = await Category.findOne({
+    _id: input.category,
+    websiteId,
+  });
+  const findStore = await Stores.findOne({
+    _id: input.store,
+    websiteId,
+  });
+  const findBrand = await Brand.findOne({
+    _id: input.brand,
+    websiteId,
+  });
 
-    const createdProduct = await Product.create({
-      name: input.name,
-      detail: input.detail,
-      unitPrice: input.unitPrice,
-      trackCode: input.trackCode,
-      optionTypes: {
-        size: input.optionTypes?.size,
-        image: input.optionTypes?.images,
-        color: input.optionTypes?.color,
-        weight: input.optionTypes?.weight,
-      },
-      totalQuantity: input.totalQuantity,
-      brand: findBrand,
-      discount: input.discount,
-      category: categoryFind,
-      store: findStore,
-      quantity: input.quantity,
-      link: input.link,
-      status: input.status,
-      estimatedDelivery: input.estimatedDelivery,
-      productProperties: input.productProperties
-        ? {
-            position: input.productProperties.position,
-            value: input.productProperties.value,
-            properties: input.productProperties.properties
-              ? {
-                  name: input.productProperties.properties.name,
-                  presentation: input.productProperties.properties.presentation,
-                }
-              : undefined,
-          }
-        : undefined,
-    });
+  if (!categoryFind || !findStore || !findBrand)
+    throw new Error("Invalid category/store/brand for this website");
 
-    if (findBrand) {
-      const plusQty = (findBrand.totalProducts || 0) + quantity;
-      await Brand.findByIdAndUpdate(brand, { totalProducts: plusQty });
-    }
-    if (categoryFind) {
-      const plusQty = categoryFind.totalProducts + quantity;
-      await Category.findByIdAndUpdate(category, { totalProducts: plusQty });
-    }
-    if (findStore) {
-      const plusQty = findStore.totalProducts + quantity;
-      await Stores.findByIdAndUpdate(store, { totalProducts: plusQty });
-    }
-    return {
-      message: "Product successfully created!",
-      success: true,
-      product: createdProduct,
-    };
-  } catch (e) {
-    console.log(e);
-    throw new Error("Failed to create product: ");
-  }
+  const createdProduct = await Product.create({
+    ...input,
+    category: categoryFind,
+    store: findStore,
+    brand: findBrand,
+    websiteId,
+  });
+
+  // Update product counters per website
+  await Brand.updateOne(
+    { _id: input.brand, websiteId },
+    { $inc: { totalProducts: input.quantity } },
+  );
+
+  await Category.updateOne(
+    { _id: input.category, websiteId },
+    { $inc: { totalProducts: input.quantity } },
+  );
+
+  await Stores.updateOne(
+    { _id: input.store, websiteId },
+    { $inc: { totalProducts: input.quantity } },
+  );
+
+  return {
+    message: "Product successfully created!",
+    success: true,
+    product: createdProduct,
+  };
 };

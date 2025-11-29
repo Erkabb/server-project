@@ -1,4 +1,5 @@
-export type Context = {
-    userId: string | null;
-};
-  
+export interface Context {
+  userId: string | null;
+  websiteId: string | null;
+  role: string | null;
+}

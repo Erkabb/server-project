@@ -14,6 +14,7 @@ export const typeDefs = gql`
     iconColor: String
     badge: String
     description: String
+    websiteId: String!
   }
 
   input CategoryInput {
@@ -24,5 +25,6 @@ export const typeDefs = gql`
     iconColor: String
     badge: String
     description: String
+    websiteId: String!
   }
 `;

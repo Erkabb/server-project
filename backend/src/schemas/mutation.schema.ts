@@ -17,6 +17,7 @@ export const MutationAndQueriesTypeDefs = gql`
     addUser(input: AddUserInput!): User!
     createJobAd(input: CreateJobAdInput!): JobAdResponse!
     createOrderRequest(input: OrderRequestInput!): RequestResponse!
+    createWebsite(input: WebsiteInput!): WebsiteResponse!
   }
   type Query {
     getUserById(_id: ID!): User!
@@ -37,5 +38,6 @@ export const MutationAndQueriesTypeDefs = gql`
     getRequests: [Request!]!
     getProductByNameOrTrackCode(input: FindProductInput!): Product!
     getProductByName(name: String!): Product!
+    getWebsiteById(_id: ID!): Website!
   }
 `;

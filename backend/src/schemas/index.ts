@@ -11,6 +11,7 @@ import { signatureTypeDefs } from "@/schemas/signature.schema";
 import { videoUploadTypeDefs } from "@/schemas/videoupload.schema";
 import { jobAdTypeDef } from "@/schemas/jobad.schema";
 import { requestTypeDefs } from "@/schemas/order-request.schema";
+import { websiteTypeDef } from "@/schemas/website.schema";
 
 export const typeDefs = mergeTypeDefs([
   AuthTypeDefs,
@@ -25,4 +26,5 @@ export const typeDefs = mergeTypeDefs([
   videoUploadTypeDefs,
   jobAdTypeDef,
   requestTypeDefs,
+  websiteTypeDef,
 ]);

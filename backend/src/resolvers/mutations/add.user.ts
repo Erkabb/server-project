@@ -4,21 +4,21 @@ import User from "@/models/auth.model";
 export const addUser: MutationResolvers["addUser"] = async (
   _,
   { input },
-  { userId },
+  { userId, websiteId: authWebsiteId },
 ) => {
-  const isAuth = await User.findById(userId);
+  if (!userId) throw new Error("Not authenticated");
 
-  if (!isAuth) throw new Error("User must signed in");
+  // Ensure the authenticated user exists
+  const isAuth = await User.findOne({ _id: userId, websiteId: authWebsiteId });
+  if (!isAuth) throw new Error("Invalid website access");
 
-  const { firstname, lastname, phoneNumber, email, password } = input;
+  // Ensure website isolation
+  if (input.websiteId !== authWebsiteId) {
+    throw new Error("Forbidden: wrong website");
+  }
 
-  return await User.create({
-    firstname,
-    lastname,
-    phoneNumber,
-    email,
-    password,
+  return User.create({
+    ...input,
     role: "user",
-    userLevel: input.userLevel,
   });
 };

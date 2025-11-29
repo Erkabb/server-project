@@ -1,4 +1,4 @@
-import mongoose, {Document, model, models, Schema} from "mongoose";
+import mongoose, { Document, model, models, Schema } from "mongoose";
 
 export interface IJobAd extends Document {
   title: string;
@@ -9,6 +9,7 @@ export interface IJobAd extends Document {
   postedBy: mongoose.Types.ObjectId; // reference to User
   createdAt: Date;
   updatedAt: Date;
+  websiteId: string;
 }
 
 const JobAdSchema = new Schema<IJobAd>(
@@ -18,10 +19,15 @@ const JobAdSchema = new Schema<IJobAd>(
     company: { type: String, required: true },
     location: { type: String, required: true },
     salary: { type: Number },
+    websiteId: {
+      type: String,
+      ref: "Website",
+      required: true,
+    },
     postedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const JobAd = models['JobAd'] || model<IJobAd>('JobAd', JobAdSchema);
+const JobAd = models["JobAd"] || model<IJobAd>("JobAd", JobAdSchema);
 export default JobAd;

@@ -7,3 +7,4 @@ export * from "./brand.model";
 export * from "./youtube-video.model";
 export * from "./jobAd.model";
 export * from "./order-request.model";
+export * from "./website.model";

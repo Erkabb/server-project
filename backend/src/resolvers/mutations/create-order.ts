@@ -1,62 +1,52 @@
-import {MutationResolvers} from "@/generated/graphql";
+import { MutationResolvers } from "@/generated/graphql";
 import User from "@/models/auth.model";
 import Product from "@/models/product.model";
 import Order from "@/models/order.model";
 
-export const createOrder: MutationResolvers['createOrder'] = async(_,  {input}, { userId }) => {
-    // Check if user is authenticated
-    if (!userId) throw new Error('Must be logged in');
+export const createOrder: MutationResolvers["createOrder"] = async (
+  _,
+  { input },
+  { userId, websiteId },
+) => {
+  if (!userId) throw new Error("Must be logged in");
 
-    const user = await User.findById(userId);
-    if (!user) throw new Error('User not found');
+  const user = await User.findOne({ _id: userId, websiteId });
+  if (!user) throw new Error("Invalid tenant");
 
-    const { productId, quantity, total, unitPrice, discount, leftQuantity, userAddress, pickUpLocation, phoneNumber, availableHours, pickedStaff } = input;
+  const product = await Product.findOne({
+    _id: input.productId,
+    websiteId,
+  });
+  if (!product) throw new Error("Product not found for this website");
 
-    // Validate product exists
-    const product = await Product.findById(productId);
-    if (!product) throw new Error('Product not found');
+  if (product.quantity < input.quantity)
+    throw new Error("Insufficient quantity");
 
-    // Check if product has enough quantity
-    if (product.quantity < quantity) throw new Error('Insufficient product quantity');
+  const calculatedLeftQuantity = product.quantity - input.quantity;
+  if (calculatedLeftQuantity !== input.leftQuantity)
+    throw new Error("Invalid left quantity");
 
-    // Validate leftQuantity calculation
-    const calculatedLeftQuantity = product.quantity - quantity;
-    if (calculatedLeftQuantity !== leftQuantity) throw new Error('Invalid left quantity calculation');
+  const calculatedTotal =
+    input.unitPrice * input.quantity - (input.discount ?? 0);
 
-    // Validate total calculation
-    const calculatedTotal = (unitPrice * quantity) - (discount || 0);
-    if (Math.abs(calculatedTotal - total) > 0.01) { // Allow small floating point differences
-        throw new Error('Invalid total calculation');
-    }
+  if (Math.abs(calculatedTotal - input.total) > 0.01)
+    throw new Error("Invalid total calculation");
 
-    // Create order
-    const order = new Order({
-        productId,
-        quantity,
-        total,
-        unitPrice,
-        discount: discount || 0,
-        leftQuantity,
-        userAddress,
-        pickUpLocation,
-        phoneNumber,
-        availableHours,
-        pickedStaff,
-        isCompany: user.isCompany,
-        companyName: user.isCompany ? user.companyName : null,
-        companyRegister: user.isCompany ? user.companyRegister : null,
-        status: 'pending'
-    });
+  // Create order inside tenant
+  await Order.create({
+    ...input,
+    websiteId,
+    isCompany: user.isCompany,
+    companyName: user.isCompany ? user.companyName : null,
+    companyRegister: user.isCompany ? user.companyRegister : null,
+    status: "pending",
+  });
 
-    // Save order
-    await order.save();
+  // Update product stock
+  await Product.updateOne(
+    { _id: input.productId, websiteId },
+    { $inc: { quantity: -input.quantity, soldQuantity: input.quantity } },
+  );
 
-    // Update product quantity
-    await Product.findByIdAndUpdate(productId, {
-        $inc: { quantity: -quantity, soldQuantity: quantity }
-    });
-
-    return {
-        message: 'Order created successfully'
-    };
+  return { message: "Order created successfully" };
 };

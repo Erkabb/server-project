@@ -11,6 +11,7 @@ export const videoUploadTypeDefs = gql`
     category: String
     youtubeUrl: YoutubeUrlType!
     channelTitle: String
+    websiteId: String!
   }
   type YoutubeUrlType {
     id: ID!
@@ -30,6 +31,7 @@ export const videoUploadTypeDefs = gql`
     description: String
     thumbnail: String
     channelTitle: String
+    websiteId: String!
   }
 
   type VideoUploadResponse {

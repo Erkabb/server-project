@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 type User = {
   _id: Schema.Types.ObjectId;
+  websiteId: string;
   email: string;
   password: string;
   firstname: string;
@@ -45,6 +46,11 @@ const userSchema = new Schema<User>(
     },
     lastname: {
       type: String,
+    },
+    websiteId: {
+      type: String,
+      ref: "Website",
+      required: true,
     },
     role: {
       type: String,
