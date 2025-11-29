@@ -29,18 +29,21 @@ const server = new ApolloServer<Context>({
 
 const handler = startServerAndCreateNextHandler<NextRequest, Context>(server, {
   context: async (req) => {
-    const token =
-      req.headers.get("authorization")?.replace("Bearer ", "") ?? "";
+    const token = req.headers.get("authorization") || "";
     const websiteToken = req.headers.get("x-website") || "";
-
+    let userId: null;
     let websiteId: string | null = null;
     let role: string | null = null;
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
-    if (decoded.websiteId) websiteId = decoded.websiteId;
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+      if (decoded.websiteId) websiteId = decoded.websiteId;
 
-    const userId = decoded.userId; // must match your JWT payload keys
-    role = decoded.role;
+      userId = decoded.userId; // must match your JWT payload keys
+      role = decoded.role;
+    } catch {
+      userId = null;
+    }
 
     if (!websiteId && websiteToken) {
       const decodedWebsite = jwt.verify(
