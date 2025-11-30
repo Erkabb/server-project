@@ -3,11 +3,10 @@ import Website from "@/models/website.model";
 
 export const getWebsiteById: QueryResolvers["getWebsiteById"] = async (
   _,
-  __,
-  { websiteId },
+  { _id },
 ) => {
-  if (!websiteId) throw new Error("Website not found");
-  const [website] = await Promise.all([Website.findById(websiteId)]);
-
+  if (!_id) throw new Error("Website ID is required");
+  const website = await Website.findById(_id);
+  if (!website) throw new Error("Website not found");
   return website;
 };

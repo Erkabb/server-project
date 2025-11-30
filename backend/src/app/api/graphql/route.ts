@@ -31,7 +31,7 @@ const handler = startServerAndCreateNextHandler<NextRequest, Context>(server, {
   context: async (req) => {
     const token = req.headers.get("authorization") || "";
     const websiteToken = req.headers.get("x-website") || "";
-    let userId: null;
+    let userId: string | null = null;
     let websiteId: string | null = null;
     let role: string | null = null;
 
