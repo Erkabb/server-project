@@ -31,9 +31,6 @@ export const createProduct: MutationResolvers["createProduct"] = async (
     websiteId,
   });
 
-  if (!categoryFind || !findStore || !findBrand)
-    throw new Error("Invalid category/store/brand for this website");
-
   const createdProduct = await Product.create({
     ...input,
     category: categoryFind,
