@@ -51,7 +51,6 @@ const productSchema = new Schema<Product>(
     },
     unitPrice: {
       type: Number,
-      required: true,
     },
     status: {
       type: String,
@@ -112,7 +111,6 @@ const productSchema = new Schema<Product>(
     },
     totalQuantity: {
       type: Number,
-      required: true,
     },
     discount: {
       type: Number,
@@ -121,13 +119,11 @@ const productSchema = new Schema<Product>(
     category: [
       {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: "Category",
       },
     ],
     quantity: {
       type: Number,
-      required: true,
     },
     link: String,
   },
