@@ -4,12 +4,12 @@ import Order from "@/models/order.model";
 export const getOrderById: QueryResolvers["getOrderById"] = async (
   _,
   { _id },
-  { userId },
+  { userId, websiteId },
 ) => {
-  if (!userId) throw new Error("User must be logged in");
-  const order = await Order.findById(_id);
+  if (!userId || !websiteId) throw new Error("User must be logged in");
+  const order = await Order.findOne({ _id, websiteId });
   if (!order) throw new Error("Order not found");
-  return order;
+  return [order];
 };
 
 export const getOrders: QueryResolvers["getOrders"] = async (
@@ -17,6 +17,6 @@ export const getOrders: QueryResolvers["getOrders"] = async (
   __,
   { userId, websiteId },
 ) => {
-  if (!userId || websiteId) throw new Error("User must be logged in");
+  if (!userId || !websiteId) throw new Error("User must be logged in");
   return Order.find({ websiteId });
 };

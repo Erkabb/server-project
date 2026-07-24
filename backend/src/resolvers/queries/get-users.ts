@@ -4,17 +4,19 @@ import User from "@/models/auth.model";
 export const getUsers: QueryResolvers["getUsers"] = async (
   _,
   __,
-  { websiteId },
+  { userId, websiteId },
 ) => {
+  if (!userId || !websiteId) throw new Error("User must be logged in");
   return User.find({ websiteId });
 };
 
 export const getUserById: QueryResolvers["getUserById"] = async (
   _,
-  __,
+  { _id },
   { userId, websiteId },
 ) => {
-  if (!userId) throw new Error("User not found");
-  const [user] = await Promise.all([User.findOne({ _id: userId, websiteId })]);
+  if (!userId || !websiteId) throw new Error("User must be logged in");
+  const user = await User.findOne({ _id, websiteId });
+  if (!user) throw new Error("User not found");
   return user;
 };

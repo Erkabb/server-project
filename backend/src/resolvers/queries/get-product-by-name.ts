@@ -4,11 +4,13 @@ import Product from "@/models/product.model";
 export const getProductByName: QueryResolvers["getProductByName"] = async (
   _,
   { name },
+  { websiteId },
 ) => {
-  const prod = await Product.findOne({ name });
+  if (!websiteId) throw new Error("Website not identified");
+  const prod = await Product.findOne({ name, websiteId });
 
   if (!prod) {
-    throw new Error("Category not found");
+    throw new Error("Product not found");
   }
 
   return prod;

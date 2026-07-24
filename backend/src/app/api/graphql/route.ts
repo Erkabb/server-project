@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.VITE_API_BASE_URL,
+    origin: "*",
     methods: ["GET", "POST", "OPTIONS"],
   }),
 );

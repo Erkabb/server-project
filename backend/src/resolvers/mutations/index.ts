@@ -9,6 +9,7 @@ export * from "./create-brand";
 export * from "./create-store";
 export * from "./video-upload";
 export * from "./add.user";
+export * from "./update-user-role";
 export * from "./create.job.ad";
 export * from "./order-request";
 export * from "./create-website";

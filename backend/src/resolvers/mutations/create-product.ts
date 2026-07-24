@@ -22,14 +22,23 @@ export const createProduct: MutationResolvers["createProduct"] = async (
     _id: input.category,
     websiteId,
   });
+  if (!categoryFind) {
+    return { message: "Category not found", success: false, product: null };
+  }
   const findStore = await Stores.findOne({
     _id: input.store,
     websiteId,
   });
+  if (!findStore) {
+    return { message: "Store not found", success: false, product: null };
+  }
   const findBrand = await Brand.findOne({
     _id: input.brand,
     websiteId,
   });
+  if (!findBrand) {
+    return { message: "Brand not found", success: false, product: null };
+  }
 
   const createdProduct = await Product.create({
     ...input,
@@ -39,20 +48,20 @@ export const createProduct: MutationResolvers["createProduct"] = async (
     websiteId,
   });
 
-  // Update product counters per website
+  // Update product counters per website (one new product each)
   await Brand.updateOne(
     { _id: input.brand, websiteId },
-    { $inc: { totalProducts: input.quantity } },
+    { $inc: { totalProducts: 1 } },
   );
 
   await Category.updateOne(
     { _id: input.category, websiteId },
-    { $inc: { totalProducts: input.quantity } },
+    { $inc: { totalProducts: 1 } },
   );
 
   await Stores.updateOne(
     { _id: input.store, websiteId },
-    { $inc: { totalProducts: input.quantity } },
+    { $inc: { totalProducts: 1 } },
   );
 
   return {

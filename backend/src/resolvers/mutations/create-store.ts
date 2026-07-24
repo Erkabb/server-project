@@ -8,8 +8,7 @@ export const createStore: MutationResolvers["createStore"] = async (
   { userId, websiteId },
 ) => {
   const user = await User.findOne({ _id: userId, websiteId });
-  // console.log(user.role)
-  if (user) throw new Error();
+  if (!user) throw new Error("Must be logged in");
   try {
     await Stores.create({
       name: input.name,

@@ -9,6 +9,5 @@ export const createWebsite: MutationResolvers["createWebsite"] = async (
   const web = await Website.create({ ...input });
 
   const token = generateWebsiteToken({ _id: web._id });
-  console.log(token);
   return { message: "Website created successfully", token };
 };

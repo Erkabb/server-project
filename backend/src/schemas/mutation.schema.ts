@@ -15,6 +15,7 @@ export const MutationAndQueriesTypeDefs = gql`
     getUploadSignature(input: SignatureInput): Signature!
     uploadVideo(input: VideoUploadInput!): VideoUploadResponse!
     addUser(input: AddUserInput!): User!
+    updateUserRole(input: UpdateUserRoleInput!): User!
     createJobAd(input: CreateJobAdInput!): JobAdResponse!
     createOrderRequest(input: OrderRequestInput!): RequestResponse!
     createWebsite(input: WebsiteInput!): WebsiteResponse!

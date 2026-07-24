@@ -53,6 +53,10 @@ export const typeDefs = gql`
     password: String!
     websiteId: String!
   }
+  input UpdateUserRoleInput {
+    userId: ID!
+    role: String!
+  }
   input AddUserInput {
     email: String!
     firstname: String!

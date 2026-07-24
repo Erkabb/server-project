@@ -25,6 +25,7 @@ export const recoverPassword: MutationResolvers["recoverPassword"] = async (
     },
     {
       password: hashedPassword,
+      $unset: { passwordResetToken: "", passwordResetTokenExpire: "" },
     },
     { new: true },
   );

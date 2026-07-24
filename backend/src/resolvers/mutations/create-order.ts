@@ -19,34 +19,31 @@ export const createOrder: MutationResolvers["createOrder"] = async (
   });
   if (!product) throw new Error("Product not found for this website");
 
-  if (product.quantity < input.quantity)
-    throw new Error("Insufficient quantity");
-
-  const calculatedLeftQuantity = product.quantity - input.quantity;
-  if (calculatedLeftQuantity !== input.leftQuantity)
-    throw new Error("Invalid left quantity");
-
+  // Price comes from the database, never from the client
   const calculatedTotal =
-    input.unitPrice * input.quantity - (input.discount ?? 0);
+    product.unitPrice * input.quantity - (input.discount ?? 0);
 
-  if (Math.abs(calculatedTotal - input.total) > 0.01)
-    throw new Error("Invalid total calculation");
+  // Atomically reserve stock: only succeeds if enough quantity is left,
+  // so concurrent orders cannot oversell
+  const stockUpdate = await Product.updateOne(
+    { _id: input.productId, websiteId, quantity: { $gte: input.quantity } },
+    { $inc: { quantity: -input.quantity, soldQuantity: input.quantity } },
+  );
+  if (stockUpdate.modifiedCount === 0)
+    throw new Error("Insufficient quantity");
 
   // Create order inside tenant
   await Order.create({
     ...input,
+    unitPrice: product.unitPrice,
+    total: calculatedTotal,
+    leftQuantity: product.quantity - input.quantity,
     websiteId,
     isCompany: user.isCompany,
     companyName: user.isCompany ? user.companyName : null,
     companyRegister: user.isCompany ? user.companyRegister : null,
     status: "pending",
   });
-
-  // Update product stock
-  await Product.updateOne(
-    { _id: input.productId, websiteId },
-    { $inc: { quantity: -input.quantity, soldQuantity: input.quantity } },
-  );
 
   return { message: "Order created successfully" };
 };

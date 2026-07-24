@@ -13,7 +13,7 @@ export const signUp: MutationResolvers["signUp"] = async (_, { input }) => {
     lastname,
     email,
     password,
-    role: "admin",
+    role: "user",
     websiteId,
   });
 };

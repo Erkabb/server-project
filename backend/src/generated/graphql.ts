@@ -3,7 +3,7 @@ import {
   GraphQLScalarType,
   GraphQLScalarTypeConfig,
 } from "graphql";
-import { Context } from "@/types";
+import { Context } from "../types";
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -210,6 +210,7 @@ export type Mutation = {
   login: AuthResponse;
   recoverPassword: Response;
   signUp: User;
+  updateUserRole: User;
   uploadVideo: VideoUploadResponse;
 };
 
@@ -271,6 +272,10 @@ export type MutationRecoverPasswordArgs = {
 
 export type MutationSignUpArgs = {
   input: SignUpInput;
+};
+
+export type MutationUpdateUserRoleArgs = {
+  input: UpdateUserRoleInput;
 };
 
 export type MutationUploadVideoArgs = {
@@ -570,6 +575,11 @@ export type SubPropertyInput = {
   presentation?: InputMaybe<Scalars["String"]["input"]>;
 };
 
+export type UpdateUserRoleInput = {
+  role: Scalars["String"]["input"];
+  userId: Scalars["ID"]["input"];
+};
+
 export type User = {
   __typename?: "User";
   _id: Scalars["ID"]["output"];
@@ -855,6 +865,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars["String"]["output"]>;
   SubProperties: ResolverTypeWrapper<SubProperties>;
   SubPropertyInput: SubPropertyInput;
+  UpdateUserRoleInput: UpdateUserRoleInput;
   User: ResolverTypeWrapper<User>;
   UserInputType: UserInputType;
   UserType: ResolverTypeWrapper<UserType>;
@@ -919,6 +930,7 @@ export type ResolversParentTypes = {
   String: Scalars["String"]["output"];
   SubProperties: SubProperties;
   SubPropertyInput: SubPropertyInput;
+  UpdateUserRoleInput: UpdateUserRoleInput;
   User: User;
   UserInputType: UserInputType;
   UserType: UserType;
@@ -1188,6 +1200,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<MutationSignUpArgs, "input">
+  >;
+  updateUserRole?: Resolver<
+    ResolversTypes["User"],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateUserRoleArgs, "input">
   >;
   uploadVideo?: Resolver<
     ResolversTypes["VideoUploadResponse"],

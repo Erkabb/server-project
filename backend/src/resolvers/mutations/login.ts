@@ -9,7 +9,7 @@ export const login: MutationResolvers["login"] = async (_, { input }) => {
   // Search ONLY inside this tenant
   const user = await User.findOne({ email, websiteId });
 
-  if (!user) throw new Error("User not found on this website");
+  if (!user) throw new Error("Email or password is incorrect");
 
   const passwordMatch = bcrypt.compareSync(password, user.password);
   if (!passwordMatch) throw new Error("Email or password is incorrect");
